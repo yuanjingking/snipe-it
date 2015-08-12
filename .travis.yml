@@ -37,6 +37,7 @@ script: ./vendor/bin/codecept run
 
 # configure notifications (email, IRC, campfire etc)
 notifications:
+  email: false
   slack:
     secure: vv9we1RxB9RsrMbomSdq6D7vz/okobw87pEkgIZjB+hj1QpQ2by90gsPsOa+NgsJEFaEP7e4KlT6SH8kK+zhbmuKaUd3d1//XdcancE22LZXi6tkiB5yuR/Jhhb1LLDqyGJTB4D92hMnnCPiUjpxNA3r437ttNeYRdYIEEP3drA=
   webhooks:
