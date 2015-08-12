@@ -9,6 +9,4 @@ modules:
     enabled:
         - PhpBrowser:
             url: http://snipe-it.dev
-        - Laravel4:
-            environment: testing
-            filters: true
+        - Laravel4
