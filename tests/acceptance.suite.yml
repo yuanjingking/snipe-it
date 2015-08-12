@@ -9,3 +9,7 @@ modules:
     enabled:
         - PhpBrowser:
             url: http://snipe-it.dev
+        - Laravel4:
+            cleanup: true
+            environment: testing
+            filters: true
