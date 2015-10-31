@@ -1,0 +1,13 @@
+#!/usr/bin/expect
+
+spawn php artisan app:install
+
+expect "Please enter your first name:" {send "Admin\r"}
+expect "Please enter your last name:" {send "Admin\r"}
+expect "Please enter your user email:" {send "foo@example.com\r"}
+expect "Please enter your user password (at least 8 characters):" {send "bar\r"}
+expect "Do you want to seed your database with dummy data? (deafult is yes):" {send "yes\r"}
+expect "Do you really wish to run this command?" {send "yes\r"}
+expect "Do you really wish to run this command?" {send "yes\r"}
+
+expect eof
