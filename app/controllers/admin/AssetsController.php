@@ -164,6 +164,15 @@ class AssetsController extends AdminController
             $asset->model_id           		= e(Input::get('model_id'));
             $asset->order_number            = e(Input::get('order_number'));
             $asset->notes            		= e(Input::get('notes'));
+
+            $asset->department              = e(Input::get('department'));
+            $asset->number                  = e(Input::get('number'));
+            $asset->unit                    = e(Input::get('unit'));
+            $asset->count                   = e(Input::get('count'));
+            $asset->depreciation_status     = e(Input::get('depreciation_status'));
+            $asset->user_check              = e(Input::get('user_check'));
+            $asset->address                 = e(Input::get('address'));
+
             $asset->asset_tag            	= e(Input::get('asset_tag'));
             $asset->user_id          		= Sentry::getId();
             $asset->archived          			= '0';
@@ -304,6 +313,14 @@ class AssetsController extends AdminController
             $asset->name            		= e(Input::get('name'));
             $asset->serial            		= e(Input::get('serial'));
             $asset->model_id           		= e(Input::get('model_id'));
+            $asset->department              = e(Input::get('department'));
+            $asset->number                  = e(Input::get('number'));
+            $asset->unit                    = e(Input::get('unit'));
+            $asset->count                   = e(Input::get('count'));
+            $asset->depreciation_status     = e(Input::get('depreciation_status'));
+            $asset->user_check              = e(Input::get('user_check'));
+            $asset->address                 = e(Input::get('address'));
+
             $asset->order_number            = e(Input::get('order_number'));
             $asset->asset_tag           	= e(Input::get('asset_tag'));
             $asset->notes            		= e(Input::get('notes'));

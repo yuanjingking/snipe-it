@@ -21,6 +21,7 @@ return array(
     'user_check'        => '核查时间',
     'address'           => '存放地址',
     'default_location'	=> '默认位置',
+    'department'        => '部门',
     'eol_date'			=> '产品寿命日期',
     'eol_rate'			=> '产品寿命等级',
     'expected_checkin'  => '预计归还日期',

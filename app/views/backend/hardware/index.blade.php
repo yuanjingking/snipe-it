@@ -75,6 +75,7 @@
                 <th data-sortable="true" data-field="location" data-searchable="true">@lang('admin/hardware/table.location')</th>
                 <th data-sortable="true" data-field="category" data-searchable="true">@lang('general.category')</th>
 
+                <th data-sortable="true" data-field="department">@lang('admin/hardware/form.department')</th>
                 <th data-sortable="true" data-field="number">@lang('admin/hardware/form.number')</th>
                 <th data-sortable="true" data-field="unit" data-searchable="true">@lang('admin/hardware/form.unit')</th>
                 <th data-sortable="true" data-field="count" data-searchable="true">@lang('admin/hardware/form.count')</th>
