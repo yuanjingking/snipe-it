@@ -1140,7 +1140,13 @@ class AssetsController extends AdminController
                         'notes',
                         'expected_checkin',
                         'order_number',
-                        'location'
+                        'location',
+                        'number',
+                        'count',
+                        'depreciation_status',
+                        'unit',
+                        'user_check',
+                        'address',
                       ];
 
     $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
@@ -1201,6 +1207,12 @@ class AssetsController extends AdminController
             'category'      => (($asset->model) && ($asset->model->category)) ? $asset->model->category->name : '',
             'eol'           => ($asset->eol_date()) ? $asset->eol_date() : '',
             'notes'         => $asset->notes,
+            'number'        =>$asset->number,
+            'count'         => $asset->count,
+            'depreciation_status'  => $asset->depreciation_status,
+            'unit'          => $asset->unit,
+            'user_check'    => $asset->user_check,
+            'address'       => $asset->address,
             'order_number'  => ($asset->order_number!='') ? '<a href="../hardware/?order_number='.$asset->order_number.'">'.$asset->order_number.'</a>' : '',
             'last_checkout' => ($asset->last_checkout!='') ? $asset->last_checkout : '',
             'expected_checkin' => ($asset->expected_checkin!='')  ? $asset->expected_checkin : '',

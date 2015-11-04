@@ -22,7 +22,7 @@
     'back'      			=> '后退',
     'bad_data'      		=> '未发现任何东西，是否数据错误？',
     'cancel'  				=> '取消',
-    'categories'			=> '目录',
+    'categories'			=> '分类',
     'category'				=> '类别：',
     'changeemail'  			=> '更改邮箱',
     'changepassword'  		=> '修改密码',

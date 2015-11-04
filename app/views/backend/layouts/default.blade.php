@@ -279,12 +279,12 @@
                 </a>
 
                 <ul class="submenu{{ (Request::is('hardware*') ? ' active' : '') }}">
-                    <li><a href="{{ URL::to('hardware?status=Deployed') }}" {{ (Request::query('status') == 'Deployed' ? ' class="active"' : '') }} >@lang('general.deployed')</a></li>
+                   <!-- <li><a href="{{ URL::to('hardware?status=Deployed') }}" {{ (Request::query('status') == 'Deployed' ? ' class="active"' : '') }} >@lang('general.deployed')</a></li>
                     <li><a href="{{ URL::to('hardware?status=RTD') }}" {{ (Request::query('status') == 'RTD' ? ' class="active"' : '') }} >@lang('general.ready_to_deploy')</a></li>
                     <li><a href="{{ URL::to('hardware?status=Pending') }}" {{ (Request::query('status') == 'Pending' ? ' class="active"' : '') }} >@lang('general.pending')</a></li>
                     <li><a href="{{ URL::to('hardware?status=Undeployable') }}" {{ (Request::query('status') == 'Undeployable' ? ' class="active"' : '') }} >@lang('general.undeployable')</a></li>
                      <li><a href="{{ URL::to('hardware?status=Archived') }}" {{ (Request::query('status') == 'Archived' ? ' class="active"' : '') }} >@lang('admin/hardware/general.archived')</a></li>
-                     <li><a href="{{ URL::to('hardware?status=Requestable') }}" {{ (Request::query('status') == 'Requestable' ? ' class="active"' : '') }} >@lang('admin/hardware/general.requestable')</a></li>
+                     <li><a href="{{ URL::to('hardware?status=Requestable') }}" {{ (Request::query('status') == 'Requestable' ? ' class="active"' : '') }} >@lang('admin/hardware/general.requestable')</a></li>-->
 
                     <li><a href="{{ URL::to('hardware') }}">@lang('general.list_all')</a></li>
 
@@ -296,7 +296,7 @@
                     <li><a href="{{ URL::to('hardware/import') }}"  >@lang('general.import') </a></li>
                 </ul>
             </li>
-            <li{{ (Request::is('admin/accessories*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
+           <!-- <li{{ (Request::is('admin/accessories*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('admin/accessories') }}">
                     <i class="fa fa-keyboard-o"></i>
                     <span>@lang('general.accessories')</span>
@@ -317,7 +317,7 @@
 
                 </a>
 
-            </li>
+            </li>-->
 
             <li{{ (Request::is('admin/users*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('admin/users') }}">
@@ -338,11 +338,11 @@
                 <ul class="submenu{{ (Request::is('reports*') ? ' active' : '') }}">
 	                 <li><a href="{{ URL::to('reports/activity') }}" {{ (Request::is('reports/activity') ? ' class="active"' : '') }} >@lang('general.activity_report')</a></li>
 
-                    <li><a href="{{ URL::to('reports/depreciation') }}" {{{ (Request::is('reports/depreciation') ? ' class="active"' : '') }}} >@lang('general.depreciation_report')</a></li>
-                    <li><a href="{{ URL::to('reports/licenses') }}" {{{ (Request::is('reports/licenses') ? ' class="active"' : '') }}} >@lang('general.license_report')</a></li>
+                   <!-- <li><a href="{{ URL::to('reports/depreciation') }}" {{{ (Request::is('reports/depreciation') ? ' class="active"' : '') }}} >@lang('general.depreciation_report')</a></li>
+                    <li><a href="{{ URL::to('reports/licenses') }}" {{{ (Request::is('reports/licenses') ? ' class="active"' : '') }}} >@lang('general.license_report')</a></li>-->
                     <li><a href="{{ URL::to('reports/asset_maintenances') }}" {{{ (Request::is('reports/asset_maintenances') ? ' class="active"' : '') }}} >@lang('general.asset_maintenance_report')</a></li>
-                    <li><a href="{{ URL::to('reports/assets') }}" {{{ (Request::is('reports/assets') ? ' class="active"' : '') }}} >@lang('general.asset_report')</a></li>
-                    <li><a href="{{ URL::to('reports/unaccepted_assets') }}" {{{ (Request::is('reports/unaccepted_assets') ? ' class="active"' : '') }}} >@lang('general.unaccepted_asset_report')</a></li>
+                   <!-- <li><a href="{{ URL::to('reports/assets') }}" {{{ (Request::is('reports/assets') ? ' class="active"' : '') }}} >@lang('general.asset_report')</a></li>
+                    <li><a href="{{ URL::to('reports/unaccepted_assets') }}" {{{ (Request::is('reports/unaccepted_assets') ? ' class="active"' : '') }}} >@lang('general.unaccepted_asset_report')</a></li>-->
                     <li><a href="{{ URL::to('reports/accessories') }}" {{{ (Request::is('reports/accessories') ? ' class="active"' : '') }}} >@lang('general.accessory_report')</a></li>
                     <li><a href="{{ URL::to('reports/custom') }}" {{{ (Request::is('reports/custom') ? ' class="active"' : '') }}} >@lang('general.custom_report')</a></li>
                 </ul>
@@ -383,7 +383,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-3 stat">
+                   <!--  <div class="col-md-3 col-sm-3 stat">
                         <div class="data">
                             <a href="{{ URL::to('hardware?status=RTD') }}">
                                 <span class="number">{{ number_format(Asset::availassetcount()) }}</span>
@@ -391,7 +391,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-3 stat">
+                   <div class="col-md-3 col-sm-3 stat">
                         <div class="data">
                             <a href="{{ URL::to('admin/licenses') }}">
                                 <span class="number">{{ number_format(License::assetcount()) }}</span>
@@ -399,6 +399,7 @@
                             </a>
                         </div>
                     </div>
+
                     <div class="col-md-3 col-sm-3 stat last">
                         <div class="data">
                             <a href="{{ URL::to('admin/licenses') }}">
@@ -406,7 +407,7 @@
                                 <span style="color:black">@lang('general.licenses_available')</span>
                             </a>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
 
 

@@ -74,6 +74,14 @@
                 <th data-sortable="true" data-field="status">@lang('admin/hardware/table.status')</th>
                 <th data-sortable="true" data-field="location" data-searchable="true">@lang('admin/hardware/table.location')</th>
                 <th data-sortable="true" data-field="category" data-searchable="true">@lang('general.category')</th>
+
+                <th data-sortable="true" data-field="number">@lang('admin/hardware/form.number')</th>
+                <th data-sortable="true" data-field="unit" data-searchable="true">@lang('admin/hardware/form.unit')</th>
+                <th data-sortable="true" data-field="count" data-searchable="true">@lang('admin/hardware/form.count')</th>
+                <th data-sortable="true" data-field="depreciation_status" data-searchable="true">@lang('admin/hardware/form.depreciation_status')</th>
+                <th data-sortable="true" data-field="user_check" data-searchable="true">@lang('admin/hardware/form.user_check')</th>
+                <th data-sortable="true" data-field="address" data-searchable="true">@lang('admin/hardware/form.address')</th>
+
                 <th data-sortable="false" data-field="eol"  data-searchable="true">@lang('general.eol')</th>
                 <th data-sortable="true" data-searchable="true" data-field="notes">@lang('general.notes')</th>
                 <th data-sortable="true" data-searchable="true"  data-field="order_number">@lang('admin/hardware/form.order')</th>
