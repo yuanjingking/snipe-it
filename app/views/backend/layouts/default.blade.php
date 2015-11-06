@@ -140,7 +140,7 @@
                                    <i class="fa fa-barcode fa-fw"></i>
                                    @lang('general.asset')</a>
                            </li>
-                        <li {{{ (Request::is('admin/licenses/create') ? 'class="active"' : '') }}}>
+                       <!-- <li {{{ (Request::is('admin/licenses/create') ? 'class="active"' : '') }}}>
                             <a href="{{ route('create/licenses') }}">
                                 <i class="fa fa-certificate fa-fw"></i>
                                 @lang('general.license')</a>
@@ -154,7 +154,7 @@
                             <a href="{{ route('create/consumable') }}">
                                 <i class="fa fa-tint fa-fw"></i>
                                 @lang('general.consumable')</a>
-                        </li>
+                        </li>-->
                         <li {{{ (Request::is('admin/users/create') ? 'class="active"' : '') }}}>
                             <a href="{{ route('create/user') }}">
                             <i class="fa fa-user fa-fw"></i>
@@ -269,7 +269,7 @@
         <ul id="dashboard-menu">
 			@if(Sentry::getUser()->hasAccess('admin'))
 			<li{{ (Request::is('*/') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
-                <a href="{{Config::get('app.url')}}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
+                <a href="{{Config::get('app.url')}}"><i class="fa fa-dashboard"></i><span>@lang('general.dashboard')</span></a>
             </li>
             <li{{ (Request::is('hardware*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('hardware') }}" class="dropdown-toggle">
@@ -429,7 +429,7 @@
         </div>
     </div>
 
-    <footer>
+   <!-- <footer>
 
         <div id="footer" class="col-md-offset-2 col-md-9 col-sm-12 col-xs-12 text-center">
 		                <div class="muted credit hidden-xs">
@@ -443,7 +443,7 @@
 						  		 &nbsp; &nbsp; ({{{  Config::get('version.app_version') }}})
                   		</div>
         </div>
-    </footer>
+    </footer>-->
 
     <!-- end main container -->
 

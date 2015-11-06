@@ -171,6 +171,7 @@ class AssetsController extends AdminController
             $asset->count                   = e(Input::get('count'));
             $asset->depreciation_status     = e(Input::get('depreciation_status'));
             $asset->user_check              = e(Input::get('user_check'));
+
             $asset->address                 = e(Input::get('address'));
 
             $asset->asset_tag            	= e(Input::get('asset_tag'));
@@ -1158,6 +1159,7 @@ class AssetsController extends AdminController
                         'expected_checkin',
                         'order_number',
                         'location',
+                        'department',
                         'number',
                         'count',
                         'depreciation_status',
@@ -1224,6 +1226,7 @@ class AssetsController extends AdminController
             'category'      => (($asset->model) && ($asset->model->category)) ? $asset->model->category->name : '',
             'eol'           => ($asset->eol_date()) ? $asset->eol_date() : '',
             'notes'         => $asset->notes,
+            'department'    =>$asset->department,
             'number'        =>$asset->number,
             'count'         => $asset->count,
             'depreciation_status'  => $asset->depreciation_status,

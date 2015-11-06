@@ -28,7 +28,7 @@
         <br>
     </div>
     <div class="col-md-9 chart">
-        <h5>@lang('general.recent_activity') (<a href="{{ Config::get('app.url') }}/reports/activity">view all</a>)</h5>
+        <h5>@lang('general.recent_activity') (<a href="{{ Config::get('app.url') }}/reports/activity">@lang('general.view_all')</a>)</h5>
 
         <table class="table table-hover table-fixed break-word">
 			<thead>

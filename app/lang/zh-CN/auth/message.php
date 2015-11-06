@@ -1,7 +1,11 @@
 <?php
 
 return array(
-
+    'username'=>'用户名',
+    'password'=>'密码',
+    'forgot_password'=>'忘记密码',
+    'remember_me'=>'记住密码',
+    'sign_in'=>'登陆',
     'account_already_exists' => '此邮箱已经被注册。',
     'account_not_found'      => '用户名或密码错误',
     'account_not_activated'  => '用户还未激活',

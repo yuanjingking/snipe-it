@@ -3,7 +3,7 @@
     <div class="alert alert-danger">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <i class="fa fa-exclamation-circle"></i>
-        <strong>Error: </strong>
+        <strong>@lang('general.error')</strong>
          Please check the form below for errors
     </div>
 </div>
@@ -15,7 +15,7 @@
     <div class="alert alert-success">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <i class="fa fa-check"></i>
-        <strong>Success: </strong>
+        <strong>@lang('general.success') </strong>
         {{ $message }}
     </div>
 </div>
@@ -26,7 +26,7 @@
     <div class="alert alert alert-danger">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <i class="fa fa-exclamation-circle"></i>
-        <strong>Error: </strong>
+        <strong>@lang('general.error') </strong>
         {{ $message }}
     </div>
 </div>
@@ -37,7 +37,7 @@
     <div class="alert alert-warning">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <i class="fa fa-warning"></i>
-        <strong>Warning: </strong>
+        <strong>@lang('general.warning') </strong>
         {{ $message }}
     </div>
 </div>
@@ -48,7 +48,7 @@
     <div class="alert alert-info">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <i class="fa fa-info-circle"></i>
-        <strong>Info: </strong>
+        <strong>@lang('general.info')</strong>
         {{ $message }}
     </div>
 </div>

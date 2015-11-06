@@ -48,7 +48,7 @@
     'download'				=> '下载',
     'depreciation'			=> '折旧',
     'editprofile'  			=> '修改简介',
-    'eol'					=> '寿命',
+    'eol'           => '投产日期',//'寿命',
     'first'					=> '首页',
     'first_name'			=> '名字',
     'file_name'				=> '文件',
@@ -139,4 +139,9 @@
     'years'					=> '年',
     'yes' 					=> '是',
     'zip'  					=> 'Zip',
+    'Warning'=>'警告：',
+    'success'=>'成功：',
+    'error'=>'错误：',
+    'info'=>'信息：',
+    'view_all'=>'查看更多'
     ];
