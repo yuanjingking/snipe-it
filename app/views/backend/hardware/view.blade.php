@@ -176,10 +176,10 @@
 
 <div class="col-md-12">
   		<!-- Licenses assets table -->
-        <h6>Software Assigned </h6>
+      <!--  <h6>Software Assigned </h6>
 		<br>
 		<!-- checked out assets table -->
-		@if (count($asset->licenses) > 0)
+		<!--@if (count($asset->licenses) > 0)
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -208,7 +208,7 @@
 			</div>
 		</div>
 		@endif
-
+-->
 <!-- Asset Maintenance -->
     <div class="row header">
         <div class="col-md-12">

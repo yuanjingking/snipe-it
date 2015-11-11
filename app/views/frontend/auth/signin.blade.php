@@ -49,12 +49,15 @@ Account Sign in ::
                         </label>
                     </div>
                 </div>
-
+               
 	    		<div class="col-md-2 col-sm-12 col-xs-12 text-right">
 	                 <button type="submit" class="btn btn-success">@lang('auth/message.sign_in')</button>
 	            </div>
             </div>
+             <div style="margin-top: 120px;
+  clear: both;">PC电脑：谷歌浏览器，360安全浏览器超速版，搜狗浏览器高速版，safari；<br>
 
+移动端：iPhone，Android，等支持html5技术的浏览器；</div>
     </form>
 </div>
 

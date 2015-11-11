@@ -53,9 +53,11 @@
 			               	{{ Form::label('category_type', Lang::get('general.type')) }}
 			               	<i class='fa fa-asterisk'></i>
 				            </div>
-			                <div class="col-md-7">				                
-			                    {{ Form::select('category_type', $category_types , Input::old('category_type', $category->category_type), array('class'=>'select2', 'style'=>'min-width:350px')) }}
-			                    {{ $errors->first('category_type', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+			                <div class="col-md-7">
+                            <input type="hidden" value="asset" name="category_type" id="category_type">
+                            资产				                
+			                    <!--{{ Form::select('category_type', $category_types , Input::old('category_type', $category->category_type), array('class'=>'select2', 'style'=>'min-width:350px')) }}
+			                    {{ $errors->first('category_type', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}-->
 			                </div>
 			            </div>
                         						

@@ -119,12 +119,12 @@ class AssetsController extends AdminController
                 $asset->warranty_months        = e(Input::get('warranty_months'));
             }
 
-            if (e(Input::get('purchase_cost')) == '') {
+            /*if (e(Input::get('purchase_cost')) == '') {
                 $asset->purchase_cost =  NULL;
             } else {
                 $asset->purchase_cost = ParseFloat(e(Input::get('purchase_cost')));
-            }
-
+            }*/
+ 			$asset->purchase_cost = 0;
             if (e(Input::get('purchase_date')) == '') {
                 $asset->purchase_date =  NULL;
             } else {
@@ -137,10 +137,10 @@ class AssetsController extends AdminController
                 $asset->assigned_to        = e(Input::get('assigned_to'));
             }
 
-            if (e(Input::get('supplier_id')) == '') {
-                $asset->supplier_id =  0;
+            if (e(Input::get('manufacturer_id')) == '') {
+                $asset->manufacturer_id =  0;
             } else {
-                $asset->supplier_id        = e(Input::get('supplier_id'));
+                $asset->manufacturer_id        = e(Input::get('manufacturer_id'));
             }
 
             if (e(Input::get('requestable')) == '') {
@@ -149,24 +149,23 @@ class AssetsController extends AdminController
                 $asset->requestable        = e(Input::get('requestable'));
             }
 
-            if (e(Input::get('rtd_location_id')) == '') {
+           /* if (e(Input::get('rtd_location_id')) == '') {
                 $asset->rtd_location_id = NULL;
             } else {
                 $asset->rtd_location_id     = e(Input::get('rtd_location_id'));
-            }
+            }*/
 
-            $checkModel = Config::get('app.url').'/api/models/'.e(Input::get('model_id')).'/check';
-            $asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
+           // $checkModel = Config::get('app.url').'/api/models/'.e(Input::get('model_id')).'/check';
+            //$asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
 
             // Save the asset data
             $asset->name            		= e(Input::get('name'));
             $asset->serial            		= e(Input::get('serial'));
             $asset->model_id           		= e(Input::get('model_id'));
-            $asset->order_number            = e(Input::get('order_number'));
+             $asset->model_name                   = e(Input::get('model_name'));
+            //$asset->order_number            = e(Input::get('order_number'));
             $asset->notes            		= e(Input::get('notes'));
-
-            $asset->department              = e(Input::get('department'));
-            $asset->number                  = e(Input::get('number'));
+            $asset->department              = e(Input::get('department'));          
             $asset->unit                    = e(Input::get('unit'));
             $asset->count                   = e(Input::get('count'));
             $asset->depreciation_status     = e(Input::get('depreciation_status'));
@@ -174,7 +173,7 @@ class AssetsController extends AdminController
 
             $asset->address                 = e(Input::get('address'));
 
-            $asset->asset_tag            	= e(Input::get('asset_tag'));
+           // $asset->asset_tag            	= e(Input::get('asset_tag'));
             $asset->user_id          		= Sentry::getId();
             $asset->archived          			= '0';
             $asset->physical            		= '1';
@@ -182,16 +181,14 @@ class AssetsController extends AdminController
 
             // Was the asset created?
             if($asset->save()) {
-
-            	if (Input::get('assigned_to')!='') {
-					$logaction = new Actionlog();
-					$logaction->asset_id = $asset->id;
-					$logaction->checkedout_to = $asset->assigned_to;
-					$logaction->asset_type = 'hardware';
-					$logaction->user_id = Sentry::getUser()->id;
-					$logaction->note = e(Input::get('note'));
-					$log = $logaction->logaction('checkout');
-				}
+                    $logaction = new Actionlog();
+                    $logaction->asset_id = $asset->id;
+                    $logaction->checkedout_to = $asset->assigned_to;
+                    $logaction->asset_type = 'hardware';
+                    $logaction->user_id = Sentry::getUser()->id;
+                    $logaction->note = e(Input::get('note'));
+                    $log = $logaction->logaction('添加资产');
+                     $logaction->save();
 
                 // Redirect to the asset listing page
                 return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.create.success'));
@@ -289,10 +286,10 @@ class AssetsController extends AdminController
                 $asset->purchase_date        = e(Input::get('purchase_date'));
             }
 
-            if (e(Input::get('supplier_id')) == '') {
-                $asset->supplier_id =  NULL;
+            if (e(Input::get('manufacturer_id')) == '') {
+                $asset->manufacturer_id =  NULL;
             } else {
-                $asset->supplier_id        = e(Input::get('supplier_id'));
+                $asset->manufacturer_id        = e(Input::get('manufacturer_id'));
             }
 
             if (e(Input::get('requestable')) == '') {
@@ -307,28 +304,36 @@ class AssetsController extends AdminController
                 $asset->rtd_location_id     = e(Input::get('rtd_location_id'));
             }
 
-            $checkModel = Config::get('app.url').'/api/models/'.e(Input::get('model_id')).'/check';
-            $asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
+           // $checkModel = Config::get('app.url').'/api/models/'.e(Input::get('model_id')).'/check';
+           // $asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
 
             // Update the asset data
             $asset->name            		= e(Input::get('name'));
             $asset->serial            		= e(Input::get('serial'));
-            $asset->model_id           		= e(Input::get('model_id'));
+            $asset->model_name           		= e(Input::get('model_name'));
+            $asset->model_id                = e(Input::get('model_id'));
             $asset->department              = e(Input::get('department'));
-            $asset->number                  = e(Input::get('number'));
+           
             $asset->unit                    = e(Input::get('unit'));
             $asset->count                   = e(Input::get('count'));
             $asset->depreciation_status     = e(Input::get('depreciation_status'));
             $asset->user_check              = e(Input::get('user_check'));
             $asset->address                 = e(Input::get('address'));
 
-            $asset->order_number            = e(Input::get('order_number'));
-            $asset->asset_tag           	= e(Input::get('asset_tag'));
+          
             $asset->notes            		= e(Input::get('notes'));
             $asset->physical            	= '1';
 
             // Was the asset updated?
             if($asset->save()) {
+            	 $logaction = new Actionlog();
+                    $logaction->asset_id = $asset->id;
+                    $logaction->checkedout_to = $asset->assigned_to;
+                    $logaction->asset_type = 'hardware';
+                    $logaction->user_id = Sentry::getUser()->id;
+                    $logaction->note = e(Input::get('note'));
+                    $log = $logaction->logaction('更新资产');
+                     $logaction->save();
                 // Redirect to the new asset page
                 return Redirect::to("hardware/$assetId/view")->with('success', Lang::get('admin/hardware/message.update.success'));
             }
@@ -367,10 +372,15 @@ class AssetsController extends AdminController
             DB::table('assets')
             ->where('id', $asset->id)
             ->update(array('assigned_to' => NULL));
-
-
             $asset->delete();
-
+                $logaction = new Actionlog();
+                    $logaction->asset_id = $asset->id;
+                    $logaction->checkedout_to = $asset->assigned_to;
+                    $logaction->asset_type = 'hardware';
+                    $logaction->user_id = Sentry::getUser()->id;
+                    $logaction->note = e(Input::get('note'));
+                    $log = $logaction->logaction('删除资产');
+                     $logaction->save();
             // Redirect to the asset management page
             return Redirect::to('hardware')->with('success', Lang::get('admin/hardware/message.delete.success'));
         }
@@ -1102,6 +1112,7 @@ class AssetsController extends AdminController
        $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category','assetstatus','assetloc')
        ->Hardware();
 
+        $categoryArray=categoryList();
        if (Input::has('search')) {
              $assets = $assets->TextSearch(Input::get('search'));
        }
@@ -1149,18 +1160,14 @@ class AssetsController extends AdminController
 
     $allowed_columns = [
                         'id',
-                        'name',
-                        'asset_tag',
+                        'name',          
                         'serial',
                         'model',
                         'last_checkout',
                         'category',
                         'notes',
-                        'expected_checkin',
-                        'order_number',
-                        'location',
+                        'expected_checkin',                        
                         'department',
-                        'number',
                         'count',
                         'depreciation_status',
                         'unit',
@@ -1213,29 +1220,25 @@ class AssetsController extends AdminController
                 }
             }
         }
-
         $rows[] = array(
             'checkbox'      =>'<div class="text-center"><input type="checkbox" name="edit_asset['.$asset->id.']" class="one_required"></div>',
             'id'        => $asset->id,
-            'name'          => '<a title="'.$asset->name.'" href="hardware/'.$asset->id.'/view">'.$asset->name.'</a>',
-            'asset_tag'     => '<a title="'.$asset->asset_tag.'" href="hardware/'.$asset->id.'/view">'.$asset->asset_tag.'</a>',
+            'name'          => '<a title="'.$asset->name.'" href="hardware/'.$asset->id.'/view">'.$asset->name.'</a>',          
             'serial'        => $asset->serial,
-            'model'         => ($asset->model) ? $asset->model->name : 'No model',
-            'status'        => ($asset->assigneduser) ? link_to('../admin/users/'.$asset->assigned_to.'/view', $asset->assigneduser->fullName()) : (($asset->assetstatus) ? $asset->assetstatus->name : ''),
-            'location'      => (($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/edit', $asset->assigneduser->userloc->name) : (($asset->defaultLoc!='') ? link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/edit', $asset->defaultLoc->name) : ''),
-            'category'      => (($asset->model) && ($asset->model->category)) ? $asset->model->category->name : '',
+            'model'         => $asset->model_name,
+            'status'        => ($asset->assigneduser) ? link_to('../admin/users/'.$asset->assigned_to.'/view', $asset->assigneduser->fullName()) : (($asset->assetstatus) ? $asset->assetstatus->name : ''),         
+            'category'      => !empty($asset->model_id) ? $categoryArray[$asset->model_id]: '',
             'eol'           => ($asset->eol_date()) ? $asset->eol_date() : '',
             'notes'         => $asset->notes,
             'department'    =>$asset->department,
-            'number'        =>$asset->number,
             'count'         => $asset->count,
             'depreciation_status'  => $asset->depreciation_status,
             'unit'          => $asset->unit,
             'user_check'    => $asset->user_check,
             'address'       => $asset->address,
-            'order_number'  => ($asset->order_number!='') ? '<a href="../hardware/?order_number='.$asset->order_number.'">'.$asset->order_number.'</a>' : '',
+           /* 'order_number'  => ($asset->order_number!='') ? '<a href="../hardware/?order_number='.$asset->order_number.'">'.$asset->order_number.'</a>' : '',
             'last_checkout' => ($asset->last_checkout!='') ? $asset->last_checkout : '',
-            'expected_checkin' => ($asset->expected_checkin!='')  ? $asset->expected_checkin : '',
+            'expected_checkin' => ($asset->expected_checkin!='')  ? $asset->expected_checkin : '',*/
             'change'        => ($inout) ? $inout : '',
             'actions'       => ($actions) ? $actions : ''
             );

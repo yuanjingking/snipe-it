@@ -5,13 +5,13 @@
 <div class="pagination">
     <ul class="pull left">
         <li>
-        Showing
+         显示
         <?php echo $paginator->getFrom(); ?>
         -
         <?php echo $paginator->getTo(); ?>
-        of
+        共
         <?php echo $paginator->getTotal(); ?>
-        items
+        条记录
         </li>
     </ul>
 
