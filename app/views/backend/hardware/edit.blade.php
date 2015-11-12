@@ -144,7 +144,8 @@
                 <label for="serial" class="col-md-2 control-label">@lang('general.category') </label>
                 <div class="col-md-7 col-sm-12">
 
-                  {{ Form::select('model_id', $category , Input::old('model_id', $asset->model_id), array('class'=>'select2 parent', 'style'=>'width:350px','id' => 'modal-category_id')) }}
+                  {{ Form::select('model_id', $category , Input::old('model_id', $asset->model_id), array('class'=>'select2 parent', 'style'=>'width:350px','id' => 'asset_category_id')) }}
+               <input type="hidden" value="{{$asset->model_id}}" name="old_model_id" id="old_category_id">
                 </div>
             </div>
 		
@@ -152,8 +153,9 @@
             <div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
                 <label for="serial" class="col-md-2 control-label">@lang('admin/hardware/form.serial') </label>
                 <div class="col-md-7 col-sm-12">
-                   
-                     <input class="form-control" type="text" name="serial" id="serial" value="{{{ Input::old('name', $asset->serial) }}}" />
+                    <div id="serial_text">{{{ Input::old('serial', $asset->serial) }}}</div>
+                    <input type="hidden" value="{{$asset->model_id}}" name="old_serial" id="old_serial">
+                     <input class="form-control" type="hidden" name="serial" id="serial" value="{{{ Input::old('serial', $asset->serial) }}}" />
                 </div>
             </div>
             
@@ -361,6 +363,23 @@
     </div>
 </div>
 <script>
+$("#asset_category_id").change(function(){
+$.ajax({
+          url: "{{Config::get('app.url')}}/hardware/checknumber?old_category_id="
+          +$("#old_category_id").val()+"&category_id="+$(this).val(),
+          success: function(data) {
+             if($("#old_serial").val()!="" && $(this).val()==$("#old_category_id").val()){
+              $("#serial").val($("#old_serial").val());
+              $("#serial_text").text($("#old_serial").val());
+             }else{
+              $("#serial").val(data);
+              $("#serial_text").text(data);
+             }
+                   
+          }
+      });
+
+})
 
 
 	var $eventSelect = $(".model");

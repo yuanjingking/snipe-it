@@ -51,7 +51,7 @@ function locationsList() {
 }
 
 function manufacturerList() {
-    $manufacturer_list = array('' => 'Select One') + Manufacturer::orderBy('name', 'asc')
+    $manufacturer_list = array('' =>  Lang::get('general.select_one')) + Manufacturer::orderBy('name', 'asc')
     ->lists('name', 'id');
     return $manufacturer_list;
 }

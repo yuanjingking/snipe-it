@@ -112,6 +112,7 @@
 
                 return $model->show_mac_address;
             } );
+            
 
             Route::get( '{modelID}/view', [ 'as' => 'api.models.view', 'uses' => 'ModelsController@getDataView' ] );
         } );
@@ -148,7 +149,10 @@
                     'uses' => 'AssetsController@getCreate'
                 ]
             );
-
+            Route::get( 'checknumber', [
+                    'as'   => 'checknumber/hardware',
+                    'uses' => 'AssetsController@getChecknumber'
+                ]);
             Route::post( 'create', [
                     'as'   => 'savenew/hardware',
                     'uses' => 'AssetsController@postCreate'

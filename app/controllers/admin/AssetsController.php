@@ -47,7 +47,23 @@ class AssetsController extends AdminController
     {
         return View::make('backend/hardware/index');
     }
-
+    /**
+    *
+    *
+    */
+	public function getChecknumber()
+	{
+	    $old_category_id=!empty($_REQUEST['old_category_id']) ? $_REQUEST['old_category_id']:"";
+	    $category_id=!empty($_REQUEST['category_id']) ? $_REQUEST['category_id']:"";
+	    echo $this->checkAssetNo($category_id,$old_category_id);
+		exit;
+	}
+	public function checkAssetNo($category_id,$old_category_id)
+	{
+		$ainfo=DB::table('assets')->where('serial','LIKE','G0'.$category_id.'%')->orderBy("serial","desc")->first();
+	   $cnum=(int)str_replace("G0","",$ainfo->serial);
+	   return $old_category_id!=$category_id ? "G0".($cnum+1):$ainfo->serial;
+	}
     /**
      * Asset create.
      *
@@ -160,8 +176,9 @@ class AssetsController extends AdminController
 
             // Save the asset data
             $asset->name            		= e(Input::get('name'));
-            $asset->serial            		= e(Input::get('serial'));
-            $asset->model_id           		= e(Input::get('model_id'));
+             $asset->model_id           		= e(Input::get('model_id'));
+          	 $newno= $this->checkAssetNo(e(Input::get('model_id')),e(Input::get('old_model_id')));
+            $asset->serial            		= $newno;
              $asset->model_name                   = e(Input::get('model_name'));
             //$asset->order_number            = e(Input::get('order_number'));
             $asset->notes            		= e(Input::get('notes'));
@@ -308,10 +325,15 @@ class AssetsController extends AdminController
            // $asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
 
             // Update the asset data
+
+
             $asset->name            		= e(Input::get('name'));
-            $asset->serial            		= e(Input::get('serial'));
+             $asset->model_id                = e(Input::get('model_id'));
+            $newno= $this->checkAssetNo(e(Input::get('model_id')),e(Input::get('old_model_id')));
+            $asset->serial            		= $newno;
+           
             $asset->model_name           		= e(Input::get('model_name'));
-            $asset->model_id                = e(Input::get('model_id'));
+           
             $asset->department              = e(Input::get('department'));
            
             $asset->unit                    = e(Input::get('unit'));

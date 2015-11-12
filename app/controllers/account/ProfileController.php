@@ -23,7 +23,7 @@ class ProfileController extends AuthorizedController
 
         // Show the page
 
-        $location_list = array('' => 'Select One') + Location::lists('name', 'id');
+        $location_list = array('' => Lang::get('general.select_one')) + Location::lists('name', 'id');
 
         // Show the page
         return View::make('frontend/account/profile', compact('user'))->with('location_list',$location_list);

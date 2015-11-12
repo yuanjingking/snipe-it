@@ -143,5 +143,11 @@
     'success'=>'成功：',
     'error'=>'错误：',
     'info'=>'信息：',
-    'view_all'=>'查看更多'
+    'view_all'=>'查看更多',
+    'select_supplier'=>'请选择供应商',
+    'please_select_an_asset'=>'请选择资产',
+    'select_an_asset_maintenance_type'=>'请选择维护类型',
+    'maintained'=>'保养',
+    'select_one'=>'请选择',
+    'do_not_depreciate'=>'不贬值',
     ];

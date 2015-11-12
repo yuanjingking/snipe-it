@@ -97,7 +97,7 @@
                         <option value="edit">编辑</option>
                         <option value="labels">生成标签</option>
                     </select>
-                    <button class="btn btn-default" id="bulkEdit" disabled>Go</button>
+                    <button class="btn btn-default" id="bulkEdit" disabled>编辑所选</button>
                 </td>
             </tr>
         </tfoot>

@@ -117,7 +117,7 @@
 
             // Prepare Asset Maintenance Type List
             $assetMaintenanceType = [
-                                        '' => 'Select an asset maintenance type',
+                                        '' => Lang::get( 'general.select_an_asset_maintenance_type'),
                                     ] + AssetMaintenance::getImprovementOptions();
             // Mark the selected asset, if it came in
             $selectedAsset = $assetId;
@@ -130,7 +130,7 @@
                                      ->whereNull( 'assets.deleted_at' )
                                      ->get();
             $asset_array         = json_decode( json_encode( $asset ), true );
-            $asset_element[ '' ] = 'Please select an asset';
+            $asset_element[ '' ] = Lang::get( 'general.please_select_an_asset');
             // Build a list out of the data results
             for ($x = 0; $x < count( $asset_array ); $x++) {
 
@@ -143,7 +143,7 @@
                     $asset_array[ $x ][ 'asset_tag' ] . ' - ' . $asset_array[ $x ][ 'name' ] . $full_name;
             }
             // Get Supplier List
-            $supplier_list = [ '' => 'Select Supplier' ] + Supplier::orderBy( 'name', 'asc' )
+            $supplier_list = [ '' => Lang::get( 'general.select_supplier') ] + Supplier::orderBy( 'name', 'asc' )
                                                                    ->lists( 'name', 'id' );
 
             // Render the view
@@ -279,7 +279,7 @@
                                      ->whereNull( 'assets.deleted_at' )
                                      ->get();
             $asset_array         = json_decode( json_encode( $asset ), true );
-            $asset_element[ '' ] = 'Please select an asset';
+            $asset_element[ '' ] = Lang::get( 'general.please_select_an_asset');
             // Build a list out of the data results
             for ($x = 0; $x < count( $asset_array ); $x++) {
 
@@ -292,7 +292,7 @@
                     $asset_array[ $x ][ 'asset_tag' ] . ' - ' . $asset_array[ $x ][ 'name' ] . $full_name;
             }
             // Get Supplier List
-            $supplier_list = [ '' => 'Select Supplier' ] + Supplier::orderBy( 'name', 'asc' )
+            $supplier_list = [ '' => Lang::get( 'general.select_supplier') ] + Supplier::orderBy( 'name', 'asc' )
                                                                    ->lists( 'name', 'id' );
 
             // Render the view

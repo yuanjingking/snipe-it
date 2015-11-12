@@ -184,8 +184,8 @@ class ModelsController extends AdminController
             return Redirect::to('assets/models')->with('error', Lang::get('admin/models/message.does_not_exist'));
         }
 
-        $depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
-        $manufacturer_list = array('' => 'Select One') + Manufacturer::lists('name', 'id');
+        $depreciation_list = array('' => Lang::get('general.do_not_depreciate')) + Depreciation::lists('name', 'id');
+        $manufacturer_list = array('' => Lang::get('general.select_one')) + Manufacturer::lists('name', 'id');
         $category_list = array('' => '') + DB::table('categories')->whereNull('deleted_at')->lists('name', 'id');
         $view = View::make('backend/models/edit', compact('model'));
         $view->with('category_list',$category_list);
@@ -359,8 +359,8 @@ class ModelsController extends AdminController
         $model->id = null;
 
         // Show the page
-        $depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
-        $manufacturer_list = array('' => 'Select One') + Manufacturer::lists('name', 'id');
+        $depreciation_list = array('' => Lang::get('general.do_not_depreciate')) + Depreciation::lists('name', 'id');
+        $manufacturer_list = array('' => Lang::get('general.select_one')) + Manufacturer::lists('name', 'id');
         $category_list = array('' => '') + DB::table('categories')->whereNull('deleted_at')->lists('name', 'id');
         $view = View::make('backend/models/edit');
         $view->with('category_list',$category_list);

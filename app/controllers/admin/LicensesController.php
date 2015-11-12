@@ -53,8 +53,8 @@ class LicensesController extends AdminController
         $license_options = array('0' => 'Top Level') + License::lists('name', 'id');
         // Show the page
         $depreciation_list = array('0' => Lang::get('admin/licenses/form.no_depreciation')) + Depreciation::lists('name', 'id');
-        $supplier_list = array('' => 'Select Supplier') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
-        $maintained_list = array('' => 'Maintained', '1' => 'Yes', '0' => 'No');
+        $supplier_list = array('' => Lang::get('general.select_supplier') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
+        $maintained_list = array('' => Lang::get('general.maintained'), '1' =>Lang::get('general.yes'), '0' =>Lang::get('general.no'));
         return View::make('backend/licenses/edit')
             ->with('license_options',$license_options)
             ->with('depreciation_list',$depreciation_list)
@@ -193,7 +193,7 @@ class LicensesController extends AdminController
         // Show the page
         $license_options = array('' => 'Top Level') + DB::table('assets')->where('id', '!=', $licenseId)->lists('name', 'id');
         $depreciation_list = array('0' => Lang::get('admin/licenses/form.no_depreciation')) + Depreciation::lists('name', 'id');
-        $supplier_list = array('' => 'Select Supplier') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
+        $supplier_list = array('' => Lang::get('general.select_supplier') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
         $maintained_list = array('' => 'Maintained', '1' => 'Yes', '0' => 'No');
         return View::make('backend/licenses/edit', compact('license'))
             ->with('license_options',$license_options)
@@ -414,7 +414,7 @@ class LicensesController extends AdminController
         }
 
         // Get the dropdown of users and then pass it to the checkout view
-         $users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat(last_name,", ",first_name," (",username,")") as full_name, id'))->whereNull('deleted_at')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc')->lists('full_name', 'id');
+         $users_list = array('' => Lang::get('general.select_user')) + DB::table('users')->select(DB::raw('concat(last_name,", ",first_name," (",username,")") as full_name, id'))->whereNull('deleted_at')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc')->lists('full_name', 'id');
 
 
         // Left join to get a list of assets and some other helpful info
@@ -427,7 +427,7 @@ class LicensesController extends AdminController
             ->get();
 
             $asset_array = json_decode(json_encode($asset), true);
-            $asset_element[''] = 'Please select an asset';
+            $asset_element[''] =Lang::get( 'general.please_select_an_asset');
 
             // Build a list out of the data results
             for ($x=0; $x<count($asset_array); $x++) {
@@ -750,7 +750,7 @@ class LicensesController extends AdminController
 
         // Show the page
         $depreciation_list = array('0' => Lang::get('admin/licenses/form.no_depreciation')) + Depreciation::lists('name', 'id');
-        $supplier_list = array('' => 'Select Supplier') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
+        $supplier_list = array('' => Lang::get( 'general.select_supplier')) + Supplier::orderBy('name', 'asc')->lists('name', 'id');
         return View::make('backend/licenses/edit')->with('license_options',$license_options)->with('depreciation_list',$depreciation_list)->with('supplier_list',$supplier_list)->with('license',$license)->with('maintained_list',$maintained_list);
 
     }
