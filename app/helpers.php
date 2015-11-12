@@ -24,7 +24,7 @@ function modelList() {
 }
 
 function categoryList() {
-    $category_list = array('' => '') + DB::table('categories')
+    $category_list = array('' =>  Lang::get('general.select_one'))  + DB::table('categories')
     ->whereNull('deleted_at')
     ->orderBy('name', 'asc')
     ->lists('name', 'id');
@@ -62,7 +62,7 @@ function statusTypeList() {
 }
 
 function managerList() {
-    $manager_list = array('' => '') + DB::table('users')
+    $manager_list = array('' =>  Lang::get('general.select_one')) + DB::table('users')
     ->select(DB::raw('concat(last_name,", ",first_name," (",username,")") as full_name, id'))
     ->whereNull('deleted_at', 'and')
     ->orderBy('last_name', 'asc')
