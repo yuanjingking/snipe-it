@@ -2,6 +2,7 @@
 
 use AuthorizedController;
 use Image;
+use Lang;
 use Input;
 use Redirect;
 use Sentry;

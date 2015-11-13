@@ -58,7 +58,7 @@
     <table
     name="assets"
     id="table"
-    data-url="{{route('api.hardware.list', array(''=>Input::get('status'),'order_number'=>Input::get('order_number')))}}"
+    data-url="{{route('api.hardware.list', array(''=>Input::get('serial')))}}"
     data-cookie="true"
     data-click-to-select="true"
     data-cookie-id-table="assetTable">
@@ -66,23 +66,23 @@
             <tr>
 
                 <th data-class="hidden-xs" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div></th>
-                <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
-                <th data-sortable="true" data-field="name"  data-visible="false">@lang('admin/hardware/form.name')</th>
+                <th data-sortable="true" data-field="id" data-visible="true">@lang('general.id')</th>
+                <th data-sortable="true" data-field="name"  data-visible="true" data-searchable="true" >@lang('admin/hardware/form.name')</th>
                 <!--<th data-sortable="true" data-field="asset_tag">@lang('admin/hardware/table.asset_tag')</th>-->
-                <th data-sortable="true" data-field="serial">@lang('admin/hardware/table.serial')</th>
-                <th data-sortable="true" data-field="model">@lang('admin/hardware/form.model')</th>
-                <th data-sortable="true" data-field="status">@lang('admin/hardware/table.status')</th>
-                <!--<th data-sortable="true" data-field="location" data-searchable="true">@lang('admin/hardware/table.location')</th>-->
-                <th data-sortable="true" data-field="category" data-searchable="true">@lang('general.category')</th>
-                <th data-sortable="true" data-field="department">@lang('admin/hardware/form.department')</th>
-                <th data-sortable="true" data-field="unit" data-searchable="true">@lang('admin/hardware/form.unit')</th>
-                <th data-sortable="true" data-field="count" data-searchable="true">@lang('admin/hardware/form.count')</th>
-                <th data-sortable="true" data-field="depreciation_status" data-searchable="true">@lang('admin/hardware/form.depreciation_status')</th>
-                <th data-sortable="true" data-field="user_check" data-searchable="true">@lang('admin/hardware/form.user_check')</th>
-                <th data-sortable="true" data-field="address" data-searchable="true">@lang('admin/hardware/form.address')</th>
+                <th data-sortable="true" data-field="serial" data-visible="true" data-searchable="true" >@lang('admin/hardware/table.serial')</th>
+                <th data-sortable="true" data-field="model" data-visible="true" data-searchable="true" >@lang('admin/hardware/form.model')</th>
+                <!--<th data-sortable="true" data-field="status" data-visible="true" data-searchable="true" >@lang('admin/hardware/table.status')</th>
+                <th data-sortable="true" data-field="location" data-searchable="true">@lang('admin/hardware/table.location')</th>-->
+                <th data-sortable="true" data-field="category" data-visible="true" data-searchable="true">@lang('general.category')</th>
+                <th data-sortable="true" data-field="department" data-visible="true" data-searchable="true" >@lang('admin/hardware/form.department')</th>
+                <th data-sortable="true" data-field="unit"  data-visible="true" data-searchable="true">@lang('admin/hardware/form.unit')</th>
+                <th data-sortable="true" data-field="count" data-visible="true" data-searchable="true">@lang('admin/hardware/form.count')</th>
+                <th data-sortable="true" data-field="depreciation_status" data-visible="true" data-searchable="true">@lang('admin/hardware/form.depreciation_status')</th>
+                <th data-sortable="true" data-field="user_check"  data-visible="true" data-searchable="true">@lang('admin/hardware/form.user_check')</th>
+                <th data-sortable="true" data-field="address" data-visible="true" data-searchable="true">@lang('admin/hardware/form.address')</th>
 
-                <th data-sortable="false" data-field="eol"  data-searchable="true">@lang('general.eol')</th>
-                <th data-sortable="true" data-searchable="true" data-field="notes">@lang('general.notes')</th>
+                <th data-sortable="false" data-field="eol"  data-visible="true" data-searchable="true">@lang('general.eol')</th>
+                <th data-sortable="true" data-searchable="true"  data-visible="true" data-field="notes">@lang('general.notes')</th>
                 <!--<th data-sortable="true" data-searchable="true"  data-field="order_number">@lang('admin/hardware/form.order')</th>
                 <th data-sortable="true" data-searchable="true" data-field="last_checkout">@lang('admin/hardware/table.checkout_date')</th>
                 <th data-sortable="true" data-field="expected_checkin" data-searchable="true">@lang('admin/hardware/form.expected_checkin')</th>

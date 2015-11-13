@@ -283,7 +283,7 @@
             </div>-->
 
             <!-- Warranty -->
-            <div class="form-group {{ $errors->has('warranty_months') ? ' has-error' : '' }}">
+            <!--<div class="form-group {{ $errors->has('warranty_months') ? ' has-error' : '' }}">
                 <label for="warranty_months" class="col-md-2 control-label">@lang('admin/hardware/form.warranty')</label>
                 <div class="col-md-2">
                     <div class="input-group">
@@ -291,10 +291,10 @@
                     {{ $errors->first('warranty_months', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
                 </div>
-            </div>
-
+            </div>-->
+<input class="col-md-2 form-control" type="hidden" name="warranty_months" id="warranty_months" value="12" />
             <!-- Status -->
-            <div class="form-group {{ $errors->has('status_id') ? ' has-error' : '' }}">
+           <!-- <div class="form-group {{ $errors->has('status_id') ? ' has-error' : '' }}">
                 <label for="status_id" class="col-md-2 control-label">@lang('admin/hardware/form.status') *</label>
                     <div class="col-md-7 col-sm-12 col-sm-12">
                         {{ Form::select('status_id', $statuslabel_list , Input::old('status_id', $asset->status_id), array('class'=>'select2 status_id', 'style'=>'width:350px','id'=>'status_select_id')) }}
@@ -304,7 +304,8 @@
                         <p class="help-block">@lang('admin/hardware/form.help_checkout')</p>
                         {{ $errors->first('status_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
-            </div>
+            </div>-->
+			<input type="hidden" id="status_id" name="status_id" value="3">
 
           @if (!$asset->id)
              <!-- Assigned To -->

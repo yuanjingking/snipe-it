@@ -8,5 +8,5 @@ return array(
     'depreciation_name'  					=> '折旧名称',
     'number_of_months'  					=> '月数',
     'update_depreciation'  					=> '更新折旧',
-
+'tiasset_depreciationstle'=>'asset_depreciations',
 );

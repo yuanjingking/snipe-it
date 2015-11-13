@@ -199,11 +199,11 @@
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li{{ (Request::is('hardware/models*') ? ' class="active"' : '') }}>
+                        <!--<li{{ (Request::is('hardware/models*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('hardware/models') }}">
                                 <i class="fa fa-th fa-fw"></i> @lang('general.asset_models')
                             </a>
-                        </li>
+                        </li>-->
                         <li{{ (Request::is('admin/settings/categories*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/categories') }}">
                                 <i class="fa fa-check fa-fw"></i> @lang('general.categories')
@@ -219,7 +219,7 @@
                                 <i class="fa fa-credit-card fa-fw"></i> @lang('general.suppliers')
                             </a>
                         </li>
-                        <li{{ (Request::is('admin/settings/statuslabels*') ? ' class="active"' : '') }}>
+                       <!-- <li{{ (Request::is('admin/settings/statuslabels*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/statuslabels') }}">
                                 <i class="fa fa-list fa-fw"></i> @lang('general.status_labels')
                             </a>
@@ -233,7 +233,7 @@
                             <a href="{{ URL::to('admin/settings/locations') }}">
                                 <i class="fa fa-globe fa-fw"></i> @lang('general.locations')
                             </a>
-                        </li>
+                        </li>-->
                         <li{{ (Request::is('admin/groups*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/groups') }}">
                                 <i class="fa fa-group fa-fw"></i> @lang('general.groups')
@@ -327,7 +327,7 @@
                 </a>
             </li>
         	 @endif
-        	 @if(Sentry::getUser()->hasAccess('reports'))
+        	<!-- @if(Sentry::getUser()->hasAccess('reports'))
             <li{{ (Request::is('reports*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('reports') }}"  class="dropdown-toggle">
                     <i class="fa fa-bar-chart"></i>
@@ -339,16 +339,16 @@
                 <ul class="submenu{{ (Request::is('reports*') ? ' active' : '') }}">
 	                 <li><a href="{{ URL::to('reports/activity') }}" {{ (Request::is('reports/activity') ? ' class="active"' : '') }} >@lang('general.activity_report')</a></li>
 
-                   <!-- <li><a href="{{ URL::to('reports/depreciation') }}" {{{ (Request::is('reports/depreciation') ? ' class="active"' : '') }}} >@lang('general.depreciation_report')</a></li>
-                    <li><a href="{{ URL::to('reports/licenses') }}" {{{ (Request::is('reports/licenses') ? ' class="active"' : '') }}} >@lang('general.license_report')</a></li>-->
+                    <li><a href="{{ URL::to('reports/depreciation') }}" {{{ (Request::is('reports/depreciation') ? ' class="active"' : '') }}} >@lang('general.depreciation_report')</a></li>
+                    <li><a href="{{ URL::to('reports/licenses') }}" {{{ (Request::is('reports/licenses') ? ' class="active"' : '') }}} >@lang('general.license_report')</a></li>
                     <li><a href="{{ URL::to('reports/asset_maintenances') }}" {{{ (Request::is('reports/asset_maintenances') ? ' class="active"' : '') }}} >@lang('general.asset_maintenance_report')</a></li>
-                   <!-- <li><a href="{{ URL::to('reports/assets') }}" {{{ (Request::is('reports/assets') ? ' class="active"' : '') }}} >@lang('general.asset_report')</a></li>
-                    <li><a href="{{ URL::to('reports/unaccepted_assets') }}" {{{ (Request::is('reports/unaccepted_assets') ? ' class="active"' : '') }}} >@lang('general.unaccepted_asset_report')</a></li>-->
+                    <li><a href="{{ URL::to('reports/assets') }}" {{{ (Request::is('reports/assets') ? ' class="active"' : '') }}} >@lang('general.asset_report')</a></li>
+                    <li><a href="{{ URL::to('reports/unaccepted_assets') }}" {{{ (Request::is('reports/unaccepted_assets') ? ' class="active"' : '') }}} >@lang('general.unaccepted_asset_report')</a></li>
                     <li><a href="{{ URL::to('reports/accessories') }}" {{{ (Request::is('reports/accessories') ? ' class="active"' : '') }}} >@lang('general.accessory_report')</a></li>
                     <li><a href="{{ URL::to('reports/custom') }}" {{{ (Request::is('reports/custom') ? ' class="active"' : '') }}} >@lang('general.custom_report')</a></li>
                 </ul>
             </li>
-             @endif
+             @endif -->
              @if(!Sentry::getUser()->hasAccess('admin'))
               <li{{ (Request::is('account/requestable-assets') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ route('requestable-assets') }}">

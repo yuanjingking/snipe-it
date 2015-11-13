@@ -191,7 +191,7 @@ class LicensesController extends AdminController
             }
 
         // Show the page
-        $license_options = array('' => 'Top Level') + DB::table('assets')->where('id', '!=', $licenseId)->lists('name', 'id');
+        $license_options = array('' => '顶层') + DB::table('assets')->where('id', '!=', $licenseId)->lists('name', 'id');
         $depreciation_list = array('0' => Lang::get('admin/licenses/form.no_depreciation')) + Depreciation::lists('name', 'id');
         $supplier_list = array('' => Lang::get('general.select_supplier') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
         $maintained_list = array('' => 'Maintained', '1' => 'Yes', '0' => 'No');
