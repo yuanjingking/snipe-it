@@ -82,7 +82,7 @@
                 <th data-sortable="true" data-field="address" data-visible="true" data-searchable="true">@lang('admin/hardware/form.address')</th>
 
                 <th data-sortable="false" data-field="eol"  data-visible="true" data-searchable="true">@lang('general.eol')</th>
-                <th data-sortable="true" data-searchable="true"  data-visible="true" data-field="notes">@lang('general.notes')</th>
+                <th data-sortable="true" data-searchable="true"  data-visible="false" data-field="notes">@lang('general.notes')</th>
                 <!--<th data-sortable="true" data-searchable="true"  data-field="order_number">@lang('admin/hardware/form.order')</th>
                 <th data-sortable="true" data-searchable="true" data-field="last_checkout">@lang('admin/hardware/table.checkout_date')</th>
                 <th data-sortable="true" data-field="expected_checkin" data-searchable="true">@lang('admin/hardware/form.expected_checkin')</th>

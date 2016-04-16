@@ -69,6 +69,7 @@ class AuthController extends BaseController
      */
     public function postSignin()
     {
+	
         // Declare the rules for the form validation
         $rules = array(
             'username'    => 'required',
