@@ -68,7 +68,7 @@
       showExport: true,
       showColumns: true,
       exportDataType: 'all',
-      exportTypes: ['csv', 'txt','json', 'xml'],
+      exportTypes: ['excel'],
       maintainSelected: true,
       paginationFirstText: "@lang('general.first')",
       paginationLastText: "@lang('general.last')",

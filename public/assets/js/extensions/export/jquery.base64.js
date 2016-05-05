@@ -57,133 +57,164 @@
  * If the input length is not a multiple of 4, or contains invalid characters
  *   then an exception is thrown.
  */
-
+ 
 jQuery.base64 = ( function( $ ) {
+  
+    var base64encodechars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";//base64 ±àÂë
+    var base64decodechars = new Array(
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 62, -1, -1, -1, 63,
+    52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, -1, -1, -1, -1, -1,
+    -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+    15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, -1, -1, -1, -1, -1,
+    -1, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+    41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, -1, -1, -1, -1, -1);
 
-  var _PADCHAR = "=",
-    _ALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
-    _VERSION = "1.0";
+    function base64encode(str) {
+        str = utf16to8(str);//ºº×Öutf8±àÂë
+        var out, i, len;
+        var c1, c2, c3;
+        len = str.length;
+        i = 0;
+        out = "";
+        while (i < len) {
+            c1 = str.charCodeAt(i++) & 0xff;
+            if (i == len) {
+                out += base64encodechars.charAt(c1 >> 2);
+                out += base64encodechars.charAt((c1 & 0x3) << 4);
+                out += "==";
+                break;
+            }
+            c2 = str.charCodeAt(i++);
+            if (i == len) {
+                out += base64encodechars.charAt(c1 >> 2);
+                out += base64encodechars.charAt(((c1 & 0x3) << 4) | ((c2 & 0xf0) >> 4));
+                out += base64encodechars.charAt((c2 & 0xf) << 2);
+                out += "=";
+                break;
+            }
+            c3 = str.charCodeAt(i++);
+            out += base64encodechars.charAt(c1 >> 2);
+            out += base64encodechars.charAt(((c1 & 0x3) << 4) | ((c2 & 0xf0) >> 4));
+            out += base64encodechars.charAt(((c2 & 0xf) << 2) | ((c3 & 0xc0) >> 6));
+            out += base64encodechars.charAt(c3 & 0x3f);
+        }
+        return out;
+    }
+    function base64decode(str) {
+        var c1, c2, c3, c4;
+        var i, len, out;
+
+        len = str.length;
+
+        i = 0;
+        out = "";
+        while (i < len) {
+
+            do {
+                c1 = base64decodechars[str.charCodeAt(i++) & 0xff];
+            } while (i < len && c1 == -1);
+            if (c1 == -1)
+                break;
 
 
-  function _getbyte64( s, i ) {
-    // This is oddly fast, except on Chrome/V8.
-    // Minimal or no improvement in performance by using a
-    // object with properties mapping chars to value (eg. 'A': 0)
+            do {
+                c2 = base64decodechars[str.charCodeAt(i++) & 0xff];
+            } while (i < len && c2 == -1);
+            if (c2 == -1)
+                break;
 
-    var idx = _ALPHA.indexOf( s.charAt( i ) );
+            out += String.fromCharCode((c1 << 2) | ((c2 & 0x30) >> 4));
 
-    if ( idx === -1 ) {
-      throw "Cannot decode base64";
+
+            do {
+                c3 = str.charCodeAt(i++) & 0xff;
+                if (c3 == 61)
+                    return out;
+                c3 = base64decodechars[c3];
+            } while (i < len && c3 == -1);
+            if (c3 == -1)
+                break;
+
+            out += String.fromCharCode(((c2 & 0xf) << 4) | ((c3 & 0x3c) >> 2));
+
+
+            do {
+                c4 = str.charCodeAt(i++) & 0xff;
+                if (c4 == 61)
+                    return out;
+                c4 = base64decodechars[c4];
+            } while (i < len && c4 == -1);
+            if (c4 == -1)
+                break;
+            out += String.fromCharCode(((c3 & 0x03) << 6) | c4);
+        }
+        return out;
     }
 
-    return idx;
-  }
-
-
-  function _decode( s ) {
-    var pads = 0,
-      i,
-      b10,
-      imax = s.length,
-      x = [];
-
-    s = String( s );
-
-    if ( imax === 0 ) {
-      return s;
+    function utf16to8(str) {//Ö§³Öºº×Ö±àÂë£¨utf16to8£©
+        var out, i, len, c;
+        out = "";
+        len = str.length;
+        for (i = 0; i < len; i++) {
+            c = str.charCodeAt(i);
+            if ((c >= 0x0001) && (c <= 0x007f)) {
+                out += str.charAt(i);
+            } else if (c > 0x07ff) {
+                out += String.fromCharCode(0xe0 | ((c >> 12) & 0x0f));
+                out += String.fromCharCode(0x80 | ((c >> 6) & 0x3f));
+                out += String.fromCharCode(0x80 | ((c >> 0) & 0x3f));
+            } else {
+                out += String.fromCharCode(0xc0 | ((c >> 6) & 0x1f));
+                out += String.fromCharCode(0x80 | ((c >> 0) & 0x3f));
+            }
+        }
+        return out;
     }
 
-    if ( imax % 4 !== 0 ) {
-      throw "Cannot decode base64";
+    function utf8to16(str) {//Ö§³Öºº×Ö±àÂë£¨utf8to16£©
+        str=base64decode(str);
+        var out, i, len, c;
+        var char2, char3;
+
+        out = "";
+        len = str.length;
+        i = 0;
+        while (i < len) {
+            c = str.charCodeAt(i++);
+            switch (c >> 4) {
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
+                    // 0xxxxxxx
+                    out += str.charAt(i - 1);
+                    break;
+                case 12: case 13:
+                    // 110x xxxx   10xx xxxx
+                    char2 = str.charCodeAt(i++);
+                    out += String.fromCharCode(((c & 0x1f) << 6) | (char2 & 0x3f));
+                    break;
+                case 14:
+                    // 1110 xxxx  10xx xxxx  10xx xxxx
+                    char2 = str.charCodeAt(i++);
+                    char3 = str.charCodeAt(i++);
+                    out += String.fromCharCode(((c & 0x0f) << 12) |
+                       ((char2 & 0x3f) << 6) |
+                       ((char3 & 0x3f) << 0));
+                    break;
+            }
+        }
+
+        return out;
     }
-
-    if ( s.charAt( imax - 1 ) === _PADCHAR ) {
-      pads = 1;
-
-      if ( s.charAt( imax - 2 ) === _PADCHAR ) {
-        pads = 2;
-      }
-
-      // either way, we want to ignore this last block
-      imax -= 4;
-    }
-
-    for ( i = 0; i < imax; i += 4 ) {
-      b10 = ( _getbyte64( s, i ) << 18 ) | ( _getbyte64( s, i + 1 ) << 12 ) | ( _getbyte64( s, i + 2 ) << 6 ) | _getbyte64( s, i + 3 );
-      x.push( String.fromCharCode( b10 >> 16, ( b10 >> 8 ) & 0xff, b10 & 0xff ) );
-    }
-
-    switch ( pads ) {
-      case 1:
-        b10 = ( _getbyte64( s, i ) << 18 ) | ( _getbyte64( s, i + 1 ) << 12 ) | ( _getbyte64( s, i + 2 ) << 6 );
-        x.push( String.fromCharCode( b10 >> 16, ( b10 >> 8 ) & 0xff ) );
-        break;
-
-      case 2:
-        b10 = ( _getbyte64( s, i ) << 18) | ( _getbyte64( s, i + 1 ) << 12 );
-        x.push( String.fromCharCode( b10 >> 16 ) );
-        break;
-    }
-
-    return x.join( "" );
-  }
-
-
-  function _getbyte( s, i ) {
-    var x = s.charCodeAt( i );
-
-    if ( x > 255 ) {
-      throw "INVALID_CHARACTER_ERR: DOM Exception 5";
-    }
-
-    return x;
-  }
-
-
-  function _encode( s ) {
-    if ( arguments.length !== 1 ) {
-      throw "SyntaxError: exactly one argument required";
-    }
-
-    s = String( s );
-
-    var i,
-      b10,
-      x = [],
-      imax = s.length - s.length % 3;
-
-    if ( s.length === 0 ) {
-      return s;
-    }
-
-    for ( i = 0; i < imax; i += 3 ) {
-      b10 = ( _getbyte( s, i ) << 16 ) | ( _getbyte( s, i + 1 ) << 8 ) | _getbyte( s, i + 2 );
-      x.push( _ALPHA.charAt( b10 >> 18 ) );
-      x.push( _ALPHA.charAt( ( b10 >> 12 ) & 0x3F ) );
-      x.push( _ALPHA.charAt( ( b10 >> 6 ) & 0x3f ) );
-      x.push( _ALPHA.charAt( b10 & 0x3f ) );
-    }
-
-    switch ( s.length - imax ) {
-      case 1:
-        b10 = _getbyte( s, i ) << 16;
-        x.push( _ALPHA.charAt( b10 >> 18 ) + _ALPHA.charAt( ( b10 >> 12 ) & 0x3F ) + _PADCHAR + _PADCHAR );
-        break;
-
-      case 2:
-        b10 = ( _getbyte( s, i ) << 16 ) | ( _getbyte( s, i + 1 ) << 8 );
-        x.push( _ALPHA.charAt( b10 >> 18 ) + _ALPHA.charAt( ( b10 >> 12 ) & 0x3F ) + _ALPHA.charAt( ( b10 >> 6 ) & 0x3f ) + _PADCHAR );
-        break;
-    }
-
-    return x.join( "" );
-  }
 
 
   return {
-    decode: _decode,
-    encode: _encode,
-    VERSION: _VERSION
+    base64decode: utf8to16,//ÏÈ½âÂëÔÙ×ª»»³Éutf16
+    base64encode: base64encode,
   };
+      
+}(jQuery));
 
-}( jQuery ) );
+
+
+

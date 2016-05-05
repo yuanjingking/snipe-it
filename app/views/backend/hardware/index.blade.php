@@ -33,7 +33,6 @@
 {{-- Page content --}}
 @section('content')
 
-
 <div class="row header">
     <div class="col-md-12">
         <a href="{{ route('create/hardware') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> @lang('general.create')</a>
@@ -130,7 +129,7 @@
         showExport: true,
         showColumns: true,
         exportDataType: 'all',
-        exportTypes: ['csv', 'txt','json', 'xml'],
+        exportTypes: ['excel'],
         maintainSelected: true,
         paginationFirstText: "@lang('general.first')",
         paginationLastText: "@lang('general.last')",
