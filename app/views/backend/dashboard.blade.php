@@ -27,7 +27,7 @@
         <h4 class="title">@lang('general.dashboard')</h4>
         <br>
     </div>
-    <div class="col-md-9 chart">
+    <div class="chart">
         <h5>@lang('general.recent_activity') (<a href="{{ Config::get('app.url') }}/reports/activity">@lang('general.view_all')</a>)</h5>
 
         <table class="table table-hover table-fixed break-word">
@@ -87,37 +87,7 @@
 
 
     </div>
-    <div class="col-md-3 chart">
-        <h5>@lang('general.asset') @lang('general.status')</h5>
-        <div id="hero-assets" style="height: 250px;"></div>
-    </div>
-
-
 
 </div>
-
-
-
-<!-- build the charts -->
-    <script type="text/javascript">
-
-
-        // Morris Donut Chart
-        Morris.Donut({
-            element: 'hero-assets',
-            data: [
-	            {label: '@lang('general.ready_to_deploy')', value: {{ $asset_stats['rtd']['percent'] }} },
-                {label: '@lang('general.deployed')', value: {{ $asset_stats['deployed']['percent'] }} },
-                {label: '@lang('general.pending')', value: {{ $asset_stats['pending']['percent'] }} },
-                {label: '@lang('general.undeployable')', value: {{ $asset_stats['undeployable']['percent'] }} },
-                {label: '@lang('general.archived')', value: {{ $asset_stats['archived']['percent'] }} },
-            ],
-            colors: ["#30a1ec", "#76bdee", "#c4dafe"],
-            formatter: function (y) { return y + "%" }
-        });
-
-
-    </script>
-
 
 @stop

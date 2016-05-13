@@ -149,19 +149,11 @@
                 </div>
             </div>
 		
-            <!-- Serial -->
-            <div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
-                <label for="serial" class="col-md-2 control-label">@lang('admin/hardware/form.serial') </label>
-                <div class="col-md-7 col-sm-12">
-                    <div id="serial_text">{{{ Input::old('serial', $asset->serial) }}}</div>
-                    <input type="hidden" value="{{$asset->model_id}}" name="old_serial" id="old_serial">
-                     <input class="form-control" type="hidden" name="serial" id="serial" value="{{{ Input::old('serial', $asset->serial) }}}" />
-                </div>
-            </div>
+          
             
             <!-- Asset Name -->
             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-2 control-label">@lang('admin/hardware/form.name')</label>
+                <label for="name" class="col-md-2 control-label">@lang('admin/hardware/form.name') *</label>
                     <div class="col-md-7 col-sm-12">
                         <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $asset->name) }}}" />
                         {{ $errors->first('name', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
@@ -174,74 +166,111 @@
                     {{ Form::select('manufacturer_id', $manufacturer , Input::old('manufacturer_id', $asset->manufacturer_id), array('class'=>'select2', 'style'=>'min-width:350px','id'=>'supplier_select_id')) }}
                 </div>
             </div>
-             <!-- Model -->
-            <div class="form-group {{ $errors->has('model_name') ? ' has-error' : '' }}">
-                <label for="parent" class="col-md-2 control-label">@lang('admin/hardware/form.model')
-                 *</label>
+             <!-- size -->
+            <div class="form-group {{ $errors->has('size') ? ' has-error' : '' }}">
+                <label for="parent" class="col-md-2 control-label">@lang('admin/hardware/form.size')
+                 </label>
                  </label>
                 <div class="col-md-7 col-sm-12">
-                 <input class="form-control" type="text" name="model_name" id="model_name" value="{{{ Input::old('model_name', $asset->model_name) }}}" />
+                 <input class="form-control" type="text" name="size" id="size" value="{{{ Input::old('size', $asset->size) }}}" />
+                   
+                </div>
+            </div>
+             <!-- product_number -->
+            <div class="form-group {{ $errors->has('product_number') ? ' has-error' : '' }}">
+                <label for="parent" class="col-md-2 control-label">@lang('admin/hardware/form.product_number')
+                 </label>
+                 </label>
+                <div class="col-md-7 col-sm-12">
+                 <input class="form-control" type="text" name="product_number" id="product_number" value="{{{ Input::old('product_number', $asset->product_number) }}}" />
+                   
+                </div>
+            </div>
+             <!-- product_code -->
+            <div class="form-group {{ $errors->has('product_code') ? ' has-error' : '' }}">
+                <label for="parent" class="col-md-2 control-label">@lang('admin/hardware/form.product_code')
+                 </label>
+                 </label>
+                <div class="col-md-7 col-sm-12">
+                 <input class="form-control" type="text" name="product_code" id="product_code" value="{{{ Input::old('size', $asset->product_code) }}}" />
+                   
+                </div>
+            </div>
+             <!-- base_code -->
+            <div class="form-group {{ $errors->has('base_code') ? ' has-error' : '' }}">
+                <label for="parent" class="col-md-2 control-label">@lang('admin/hardware/form.base_code')
+                 </label>
+                 </label>
+                <div class="col-md-7 col-sm-12">
+                 <input class="form-control" type="text" name="base_code" id="base_code" value="{{{ Input::old('base_code', $asset->base_code) }}}" />
+                   
+                </div>
+            </div>
+             <!-- address -->
+            <div class="form-group {{ $errors->has('address') ? ' has-error' : '' }}">
+                <label for="parent" class="col-md-2 control-label">@lang('admin/hardware/form.address')
+                 </label>
+                 </label>
+                <div class="col-md-7 col-sm-12">
+                 <input class="form-control" type="text" name="address" id="address" value="{{{ Input::old('address', $asset->address) }}}" />
+                   
+                </div>
+            </div>
+             <!-- owner -->
+            <div class="form-group {{ $errors->has('owner') ? ' has-error' : '' }}">
+                <label for="parent" class="col-md-2 control-label">@lang('admin/hardware/form.owner')
+                 </label>
+                 </label>
+                <div class="col-md-7 col-sm-12">
+                 <input class="form-control" type="text" name="owner" id="owner" value="{{{ Input::old('owner', $asset->owner) }}}" />
+                   
+                </div>
+            </div>
+             <!-- user_check -->
+            <div class="form-group {{ $errors->has('user_check') ? ' has-error' : '' }}">
+                <label for="parent" class="col-md-2 control-label">@lang('admin/hardware/form.user_check')
+                 </label>
+                 </label>
+                <div class="col-md-7 col-sm-12">
+                 <input class="form-control" type="text" name="user_check" id="user_check" value="{{{ Input::old('user_check', $asset->user_check) }}}" />
+                   
+                </div>
+            </div>
+             <!-- money_way -->
+            <div class="form-group ">
+                <label for="parent" class="col-md-2 control-label">@lang('admin/hardware/form.money_way')
+                 </label>
+                 </label>
+                <div class="col-md-7 col-sm-12">
+                 <input class="form-control" type="text" name="money_way" id="money_way" value="{{{ Input::old('money_way', $asset->money_way) }}}" />
+                   
+                </div>
+            </div>
+             <!-- sugguset -->
+            <div class="form-group ">
+                <label for="parent" class="col-md-2 control-label">@lang('admin/hardware/form.sugguset')
+                 </label>
+                 </label>
+                <div class="col-md-7 col-sm-12">
+                 <input class="form-control" type="text" name="sugguset" id="sugguset" value="{{{ Input::old('sugguset', $asset->sugguset) }}}" />
                    
                 </div>
             </div>
 
-            <!--add new field by jack 2015-11-04  start-->
-            <div  id="department" class="form-group {{ $errors->has('department') ? ' has-error' : '' }}">
-                <label for="department" class="col-md-2 control-label">@lang('admin/hardware/form.department')</label>
-                    <div class="col-md-7 col-sm-12">
-                        <input class="form-control" type="text" name="department" id="department" value="{{{ Input::old('department', $asset->department) }}}" />
-
-                    </div>
-            </div>
-
-            <div  id="unit" class="form-group {{ $errors->has('unit') ? ' has-error' : '' }}" >
-                <label for="unit" class="col-md-2 control-label">@lang('admin/hardware/form.unit')</label>
-                    <div class="col-md-7 col-sm-12">
-                        <input class="form-control" type="text" name="unit" id="unit" value="{{{ Input::old('unit', $asset->unit) }}}" />
-
-                    </div>
-            </div>
-            <div  id="count" class="form-group {{ $errors->has('count') ? ' has-error' : '' }}">
-                <label for="count" class="col-md-2 control-label">@lang('admin/hardware/form.count')</label>
-                    <div class="col-md-7 col-sm-12">
-                        <input class="form-control" type="text" name="count" id="count" value="{{{ Input::old('count', $asset->count) }}}" />
-                    </div>
-            </div>
-            <div  id="depreciation_status" class="form-group {{ $errors->has('depreciation_status') ? ' has-error' : '' }}" >
-                <label for="depreciation_status" class="col-md-2 control-label">@lang('admin/hardware/form.depreciation_status')</label>
-                    <div class="col-md-7 col-sm-12">
-                        <input class="form-control" type="text" name="depreciation_status" id="depreciation_status"
-                         value="{{{ Input::old('depreciation_status', $asset->depreciation_status) }}}" />
-                       
-                    </div>
-            </div>
-            <div  id="user_check" class="form-group {{ $errors->has('user_check') ? ' has-error' : '' }}">
-                <label for="user_check" class="col-md-2 control-label">@lang('admin/hardware/form.user_check')</label>
-                    <div class="col-md-7 col-sm-12">
-                        <input class="form-control" type="text" name="user_check" id="user_check" value="{{{ Input::old('user_check', $asset->user_check) }}}" />
-                       
-                    </div>
-            </div>
-             <div  id="address" class="form-group {{ $errors->has('address') ? ' has-error' : '' }}">
-                <label for="address" class="col-md-2 control-label">@lang('admin/hardware/form.address')</label>
-                    <div class="col-md-7 col-sm-12">
-                        <input class="form-control" type="text" name="address" id="address" value="{{{ Input::old('address', $asset->address) }}}" />
-                      
-                    </div>
-            </div>
+           
 
         <!--end-->
 
             <!-- MAC Address -->
-            <div id="mac_address" class="form-group {{ $errors->has('mac_address') ? ' has-error' : '' }}" style="display:none;">
+          <!--  <div id="mac_address" class="form-group {{ $errors->has('mac_address') ? ' has-error' : '' }}" style="display:none;">
                 <label for="mac_address" class="col-md-2 control-label">@lang('admin/hardware/form.mac_address')</label>
                     <div class="col-md-7 col-sm-12">
                         <input class="form-control" type="text" name="mac_address" id="mac_address" value="{{{ Input::old('mac_address', $asset->mac_address) }}}" />
                         {{ $errors->first('mac_address', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
-            </div>
+            </div>-->
 
-            <!-- Purchase Date -->
+            <!-- Purchase Date 
             <div class="form-group {{ $errors->has('purchase_date') ? ' has-error' : '' }}">
                 <label for="purchase_date" class="col-md-2 control-label">@lang('admin/hardware/form.date')</label>
                 <div class="input-group col-md-3">
@@ -250,7 +279,7 @@
                 {{ $errors->first('purchase_date', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
             </div>
-
+          -->
           
 
             <!-- Order Number -->
@@ -364,7 +393,7 @@
     </div>
 </div>
 <script>
-$("#asset_category_id").change(function(){
+/*$("#asset_category_id").change(function(){
 $.ajax({
           url: "{{Config::get('app.url')}}/hardware/checknumber?old_category_id="
           +$("#old_category_id").val()+"&category_id="+$(this).val(),
@@ -380,7 +409,7 @@ $.ajax({
           }
       });
 
-})
+})*/
 
 
 	var $eventSelect = $(".model");

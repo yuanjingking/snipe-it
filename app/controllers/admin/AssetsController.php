@@ -176,19 +176,18 @@ class AssetsController extends AdminController
 
             // Save the asset data
             $asset->name            		= e(Input::get('name'));
-             $asset->model_id           		= e(Input::get('model_id'));
-          	 $newno= $this->checkAssetNo(e(Input::get('model_id')),e(Input::get('old_model_id')));
-            $asset->serial            		= $newno;
-             $asset->model_name                   = e(Input::get('model_name'));
-            //$asset->order_number            = e(Input::get('order_number'));
-            $asset->notes            		= e(Input::get('notes'));
-            $asset->department              = e(Input::get('department'));          
-            $asset->unit                    = e(Input::get('unit'));
-            $asset->count                   = e(Input::get('count'));
-            $asset->depreciation_status     = e(Input::get('depreciation_status'));
-            $asset->user_check              = e(Input::get('user_check'));
-
-            $asset->address                 = e(Input::get('address'));
+            $asset->model_id           		= e(Input::get('model_id'));
+            $asset->size                   = e(Input::get('size'));
+            $asset->product_number            = e(Input::get('product_number'));
+            $asset->product_code            		= e(Input::get('product_code'));
+            $asset->base_code              = e(Input::get('base_code'));          
+            $asset->address                    = e(Input::get('address'));
+            $asset->owner                   = e(Input::get('owner'));
+            $asset->user_check     = e(Input::get('user_check'));
+            $asset->money_way                 = e(Input::get('money_way'));
+            $asset->sugguset              = e(Input::get('sugguset'));
+            $asset->notes                  = e(Input::get('notes'));
+          
 
            // $asset->asset_tag            	= e(Input::get('asset_tag'));
             $asset->user_id          		= Sentry::getId();
@@ -327,23 +326,19 @@ class AssetsController extends AdminController
             // Update the asset data
 
 
-            $asset->name            		= e(Input::get('name'));
-             $asset->model_id                = e(Input::get('model_id'));
-            $newno= $this->checkAssetNo(e(Input::get('model_id')),e(Input::get('old_model_id')));
-            $asset->serial            		= $newno;
-           
-            $asset->model_name           		= e(Input::get('model_name'));
-           
-            $asset->department              = e(Input::get('department'));
-           
-            $asset->unit                    = e(Input::get('unit'));
-            $asset->count                   = e(Input::get('count'));
-            $asset->depreciation_status     = e(Input::get('depreciation_status'));
-            $asset->user_check              = e(Input::get('user_check'));
-            $asset->address                 = e(Input::get('address'));
+            $asset->name                    = e(Input::get('name'));
+            $asset->model_id                = e(Input::get('model_id'));
+            $asset->size                   = e(Input::get('size'));
+            $asset->product_number            = e(Input::get('product_number'));
+            $asset->product_code                    = e(Input::get('product_code'));
+            $asset->base_code              = e(Input::get('base_code'));          
+            $asset->address                    = e(Input::get('address'));
+            $asset->owner                   = e(Input::get('owner'));
+            $asset->user_check     = e(Input::get('user_check'));
+            $asset->money_way                 = e(Input::get('money_way'));
+            $asset->sugguset              = e(Input::get('sugguset'));
+            $asset->notes                  = e(Input::get('notes'));
 
-          
-            $asset->notes            		= e(Input::get('notes'));
             $asset->physical            	= '1';
 
             // Was the asset updated?
@@ -1135,6 +1130,7 @@ class AssetsController extends AdminController
        ->Hardware();
 
         $categoryArray=categoryList();
+        $manufacturerArray=manufacturerList();
        if (Input::has('search')) {
              $assets = $assets->TextSearch(Input::get('search'));
        }
@@ -1179,22 +1175,23 @@ class AssetsController extends AdminController
       	break;
 
       }
-
+   
     $allowed_columns = [
                         'id',
-                        'name',          
-                        'serial',
-                        'model',
-                        'last_checkout',
-                        'category',
-                        'notes',
-                        'expected_checkin',                        
-                        'department',
-                        'count',
-                        'depreciation_status',
-                        'unit',
+                        'name', 
+                        'model',  
+                        'manufacturer_id',       
+                        'size',
+                        'product_number',
+                        'product_code',
+                        'base_code',
+                        'address',                        
+                        'owner',
                         'user_check',
-                        'address',
+                        'money_way',
+                        'sugguset',
+                        'notes',
+                        'update_at'
                       ];
 
     $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
@@ -1207,6 +1204,9 @@ class AssetsController extends AdminController
             break;
         case 'category':
             $assets = $assets->OrderCategory($order);
+            break;
+        case 'manufacturer_id':
+            $assets = $assets->OrderManufacturer($order);
             break;
         case 'location':
             $assets = $assets->OrderLocation($order);
@@ -1242,23 +1242,26 @@ class AssetsController extends AdminController
                 }
             }
         }
-	
+	   
         $rows[] = array(
             'checkbox'      =>'<div class="text-center"><input type="checkbox" name="edit_asset['.$asset->id.']" class="one_required"></div>',
-            'id'        => $asset->id,
-            'name'          => '<a title="'.$asset->name.'" href="hardware/'.$asset->id.'/view">'.$asset->name.'</a>',          
-            'serial'        => $asset->serial,
-            'model'         => $asset->model_name,
-            //'status'        => ($asset->assigneduser) ? link_to('../admin/users/'.$asset->assigned_to.'/view', $asset->assigneduser->fullName()) : (($asset->assetstatus) ? $asset->assetstatus->name : ''),         
-            'category'      => !empty($asset->model_id) ? $categoryArray[$asset->model_id]: '',
-            'eol'           => ($asset->eol_date()) ? $asset->eol_date() : '',
-            'notes'         => $asset->notes,
-            'department'    =>$asset->department,
-            'count'         => $asset->count,
-            'depreciation_status'  => $asset->depreciation_status,
-            'unit'          => $asset->unit,
-            'user_check'    => $asset->user_check,
-            'address'       => $asset->address,
+            'id'        => $asset->id, 
+            'name'          => '<a title="'.$asset->name.'" href="hardware/'.$asset->id.'/view">'.$asset->name.'</a>',  
+            'model_id'      => !empty($asset->model_id) ? $categoryArray[$asset->model_id]: '',  
+            'manufacturer_id'      => !empty($asset->manufacturer_id) ? $manufacturerArray[$asset->manufacturer_id]: '',        
+            'size'        => $asset->size,
+            'product_number'         => $asset->product_number,
+            'product_code'           => $asset->product_code,
+            'base_code'         => $asset->base_code,
+            'address'    =>$asset->address,
+            'owner'         => $asset->owner,
+            'user_check'  => $asset->user_check,
+            'money_way'          => $asset->money_way,
+            'sugguset'    => $asset->sugguset,
+            'notes'       => $asset->notes,
+            //'update_at'   =>($asset->update_at()) ? $asset->update_at() : '',
+
+           
            /* 'order_number'  => ($asset->order_number!='') ? '<a href="../hardware/?order_number='.$asset->order_number.'">'.$asset->order_number.'</a>' : '',
             'last_checkout' => ($asset->last_checkout!='') ? $asset->last_checkout : '',
             'expected_checkin' => ($asset->expected_checkin!='')  ? $asset->expected_checkin : '',*/
