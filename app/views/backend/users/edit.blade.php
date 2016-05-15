@@ -33,8 +33,8 @@
 
 <!-- Tabs -->
 <ul class="nav nav-tabs">
-    <li class="active"><a href="#tab-general" data-toggle="tab">General</a></li>
-    <li><a href="#tab-permissions" data-toggle="tab">Permissions</a></li>
+    <li class="active"><a href="#tab-general" data-toggle="tab">用户信息</a></li>
+    <li><a href="#tab-permissions" data-toggle="tab">权限</a></li>
 </ul>
 
 <form class="form-horizontal" method="post" action="" autocomplete="off">
@@ -50,6 +50,16 @@
             <div class="col-md-12 column">
             <br><br>
 
+
+            <!-- Last Name -->
+            <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
+                <label class="col-md-3 control-label" for="first_name">@lang('general.last_name') <i class='fa fa-asterisk'></i></label>
+                <div class="col-md-7">
+                    <input class="form-control" type="text" name="last_name" id="last_name" value="{{{ Input::old('last_name', $user->last_name) }}}" />
+                    {{ $errors->first('last_name', '<br><span class="alert-msg">:message</span>') }}
+                </div>
+            </div>
+
             <!-- First Name -->
             <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="first_name">@lang('general.first_name')
@@ -60,14 +70,6 @@
                 </div>
             </div>
 
-            <!-- Last Name -->
-            <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
-                <label class="col-md-3 control-label" for="first_name">@lang('general.last_name') <i class='fa fa-asterisk'></i></label>
-                <div class="col-md-7">
-                    <input class="form-control" type="text" name="last_name" id="last_name" value="{{{ Input::old('last_name', $user->last_name) }}}" />
-                    {{ $errors->first('last_name', '<br><span class="alert-msg">:message</span>') }}
-                </div>
-            </div>
 
 
 			<!-- Username -->
@@ -154,7 +156,7 @@
 
 
 			<!-- Manager -->
-            <div class="form-group {{ $errors->has('manager_id') ? 'has-error' : '' }}">
+           <!-- <div class="form-group {{ $errors->has('manager_id') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="manager_id">@lang('admin/users/table.manager')</label>
                 <div class="col-md-7">
                     {{ Form::select('manager_id', $manager_list , Input::old('manager_id', $user->manager_id), array('class'=>'select2', 'style'=>'width:350px')) }}
@@ -163,7 +165,7 @@
             </div>
 
 			<!-- Location -->
-            <div class="form-group {{ $errors->has('location_id') ? 'has-error' : '' }}">
+           <!-- <div class="form-group {{ $errors->has('location_id') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="location_id">@lang('admin/users/table.location')
                     </label>
                 <div class="col-md-7">

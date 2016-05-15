@@ -16,4 +16,4 @@ return array(
     'pending'  					=> '待处理',
     'undeployable'  			=> '不可部署',
     'view'  					=> '查看资产',
-);
+    'history'                   =>'操作记录');

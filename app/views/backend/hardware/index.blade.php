@@ -57,7 +57,7 @@
     <table
     name="assets"
     id="table"
-    data-url="{{route('api.hardware.list', array(''=>Input::get('serial')))}}"
+    data-url="{{route('api.hardware.list', array(''=>Input::get('status')))}}"
     data-cookie="true"
     data-click-to-select="true"
     data-cookie-id-table="assetTable">

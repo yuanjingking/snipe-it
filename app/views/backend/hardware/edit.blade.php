@@ -140,8 +140,8 @@
   		
            <!-- Model -->
            
-            <div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
-                <label for="serial" class="col-md-2 control-label">@lang('general.category') </label>
+            <div class="form-group {{ $errors->has('model_id') ? ' has-error' : '' }}">
+                <label for="model_id" class="col-md-2 control-label">@lang('general.category') </label>
                 <div class="col-md-7 col-sm-12">
 
                   {{ Form::select('model_id', $category , Input::old('model_id', $asset->model_id), array('class'=>'select2 parent', 'style'=>'width:350px','id' => 'asset_category_id')) }}
@@ -183,7 +183,7 @@
                  </label>
                 <div class="col-md-7 col-sm-12">
                  <input class="form-control" type="text" name="product_number" id="product_number" value="{{{ Input::old('product_number', $asset->product_number) }}}" />
-                   
+                 <input type="hidden" name="old_product_number" id="old_product_number" value="{{{ Input::old('product_number', $asset->product_number) }}}" />     
                 </div>
             </div>
              <!-- product_code -->
@@ -393,23 +393,23 @@
     </div>
 </div>
 <script>
-/*$("#asset_category_id").change(function(){
+$("#asset_category_id").change(function(){
 $.ajax({
           url: "{{Config::get('app.url')}}/hardware/checknumber?old_category_id="
           +$("#old_category_id").val()+"&category_id="+$(this).val(),
           success: function(data) {
-             if($("#old_serial").val()!="" && $(this).val()==$("#old_category_id").val()){
-              $("#serial").val($("#old_serial").val());
-              $("#serial_text").text($("#old_serial").val());
+             if($("#old_product_number").val()!="" && $(this).val()==$("#old_category_id").val()){
+              $("#product_number").val($("#old_product_number").val());
+             // $("#product_number_text").text($("#old_product_number").val());
              }else{
-              $("#serial").val(data);
-              $("#serial_text").text(data);
+              $("#product_number").val(data);
+              //$("#product_number_text").text(data);
              }
                    
           }
       });
 
-})*/
+})
 
 
 	var $eventSelect = $(".model");

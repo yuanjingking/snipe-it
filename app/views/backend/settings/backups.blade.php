@@ -26,9 +26,9 @@
 
                             <table class="table table-hover">
                                 <thead>
-                                    <th>File</th>
-                                    <th>Created</th>
-                                    <th>Size</th>
+                                    <th>文件</th>
+                                    <th>备份时间</th>
+                                    <th>大小</th>
                                     <th></th>
                                 </thead>
                                 <tbody>
@@ -65,7 +65,7 @@
 
 
                         </form>
-                        <p>Backup files are located in: app/storage/dumps</p>
+                        <p>备份文件存放目录: app/storage/dumps</p>
 
 
 

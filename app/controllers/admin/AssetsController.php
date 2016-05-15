@@ -44,7 +44,7 @@ class AssetsController extends AdminController
      */
 
     public function getIndex()
-    {
+    {  
         return View::make('backend/hardware/index');
     }
     /**
@@ -60,9 +60,14 @@ class AssetsController extends AdminController
 	}
 	public function checkAssetNo($category_id,$old_category_id)
 	{
-		$ainfo=DB::table('assets')->where('serial','LIKE','G0'.$category_id.'%')->orderBy("serial","desc")->first();
-	   $cnum=(int)str_replace("G0","",$ainfo->serial);
-	   return $old_category_id!=$category_id ? "G0".($cnum+1):$ainfo->serial;
+		$ainfo=DB::table('assets')->where('product_number','LIKE','B00'.$category_id.'%')->orderBy("product_number","desc")->first();
+	  if($ainfo !=null){
+            $cnum=(int)str_replace("B00","",$ainfo->product_number);
+      }else{
+            $cnum=(int)$category_id.'00001';
+      }
+     
+	   return $old_category_id!=$category_id ? "B00".($cnum+1):$ainfo->product_number;
 	}
     /**
      * Asset create.
@@ -790,7 +795,7 @@ class AssetsController extends AdminController
         $asset = clone $asset_to_clone;
         $asset->id = null;
         $asset->asset_tag = '';
-        $asset->serial = '';
+        $asset->product_number = '';
         $asset->assigned_to = '';
         $asset->mac_address = '';
         return View::make('backend/hardware/edit')
@@ -1191,7 +1196,7 @@ class AssetsController extends AdminController
                         'money_way',
                         'sugguset',
                         'notes',
-                        'update_at'
+                        'updated_at'
                       ];
 
     $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
@@ -1259,7 +1264,7 @@ class AssetsController extends AdminController
             'money_way'          => $asset->money_way,
             'sugguset'    => $asset->sugguset,
             'notes'       => $asset->notes,
-            //'update_at'   =>($asset->update_at()) ? $asset->update_at() : '',
+            //'update_at'   =>($asset->updated_at()) ? $asset->updated_at() : '',
 
            
            /* 'order_number'  => ($asset->order_number!='') ? '<a href="../hardware/?order_number='.$asset->order_number.'">'.$asset->order_number.'</a>' : '',

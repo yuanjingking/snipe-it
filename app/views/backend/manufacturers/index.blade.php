@@ -43,22 +43,6 @@
 </div>
 </div>
 
-    <!-- side address column -->
-   <div class="col-md-3 col-xs-12 address pull-right">
-        <br /><br />
-        <h6>Have Some Haiku</h6>
-        <p>The Staples truck came.<br>
-        Left thirteen cardboard boxes.<br>
-        Honey stained maple.</p>
-
-        <p>----------</p>
-
-        <p>I'm sorry, there's – um -<br>
-        insufficient – what's-it-called?<br>
-        The term eludes me...</p>
-
-    </div>
-
 </div>
 
 @section('moar_scripts')

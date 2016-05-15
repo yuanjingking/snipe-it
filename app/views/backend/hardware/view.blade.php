@@ -46,7 +46,7 @@
 
 <div class="user-profile">
 <div class="row profile">
-<div class="col-md-9 bio">
+<div class=" bio">
 
 		@if ($asset->model->deleted_at!='')
             <div class="alert alert-warning alert-block">
@@ -60,115 +60,55 @@
 			</div>
 		@endif
 
-        @if ($asset->serial)
-            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.serial'): </strong>
-            <em>{{{ $asset->serial }}}</em></div>
+       
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.size'): </strong>
+            <em>{{{ $asset->size }}}</em></div>
 
-        @endif
+       
 
-        @if ($asset->mac_address!='')
-            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.mac_address'):</strong>
-            {{{ $asset->mac_address }}}
-            </div>
-        @endif
+       
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.product_number'): </strong>
+            <em>{{{ $asset->product_number }}}</em></div>
 
-        @if ($asset->model->manufacturer)
-            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.manufacturer'): </strong>
-            <a href="{{ route('update/manufacturer', $asset->model->manufacturer->id) }}">
-            {{{ $asset->model->manufacturer->name }}}
-            </a> </div>
-            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.model'):</strong>
-            <a href="{{ route('view/model', $asset->model->id) }}">
-            {{{ $asset->model->name }}}
-            </a>
-             / {{{ $asset->model->modelno }}}</div>
-        @endif
+       
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.product_code'): </strong>
+            <em>{{{ $asset->product_code }}}</em></div>
 
-        @if ($asset->purchase_date)
-            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.date'): </strong>
-            {{{ $asset->purchase_date }}} </div>
-        @endif
+       
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.base_code'): </strong>
+            <em>{{{ $asset->base_code }}}</em></div>
 
-        @if ($asset->purchase_cost)
-            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.cost'):</strong>
-            @if (($asset->id) && ($asset->assetloc))
-                {{{ $asset->assetloc->currency }}}
-            @else
-                {{{ Setting::first()->default_currency }}}
-            @endif
+        
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.address'): </strong>
+            <em>{{{ $asset->address }}}</em></div>
 
-            {{{ number_format($asset->purchase_cost,2) }}} </div>
-        @endif
+      
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.owner'): </strong>
+            <em>{{{ $asset->owner }}}</em></div>
 
-        @if ($asset->order_number)
-            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.order'):</strong>
-            {{{ $asset->order_number }}} </div>
-        @endif
+        
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.user_check'): </strong>
+            <em>{{{ $asset->user_check }}}</em></div>
 
-        @if ($asset->supplier_id)
-            <div class="col-md-6" style="padding-bottom: 5px;">
-                  <strong>@lang('admin/hardware/form.supplier'): </strong>
-                  <a href="{{ route('view/supplier', $asset->supplier_id) }}">
-                  {{{ $asset->supplier->name }}}
-                  </a>
-            </div>
-        @endif
+        
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.money_way'): </strong>
+            <em>{{{ $asset->money_way }}}</em></div>
 
-        @if ($asset->warranty_months)
-            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.warranty'):</strong>
-            {{{ $asset->warranty_months }}}
-            @lang('admin/hardware/form.months')
-            </div>
-            <div class="col-md-12 {{{ $asset->warrantee_expires() < date("Y-m-d H:i:s") ? 'ui-state-highlight' : '' }}}"  style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.expires'):</strong>
-            {{{ $asset->warrantee_expires() }}}</div>
-        @endif
+        
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.sugguset'): </strong>
+            <em>{{{ $asset->sugguset }}}</em></div>
 
-        @if ($asset->depreciation)
-            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.depreciation'): </strong>
-            {{ $asset->depreciation->name }}
-                ({{{ $asset->depreciation->months }}}
-                @lang('admin/hardware/form.months')
-                )</div>
-            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.fully_depreciated'): </strong>
-             @if ($asset->time_until_depreciated()->y > 0)
-                {{{ $asset->time_until_depreciated()->y }}}
-                @lang('admin/hardware/form.years'),
-             @endif
-           {{{ $asset->time_until_depreciated()->m }}}
-            @lang('admin/hardware/form.months')
-               ({{{ $asset->depreciated_date()->format('Y-m-d') }}})
-             </div>
-        @endif
+      
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.notes'): </strong>
+            <em>{{{ $asset->notes }}}</em></div>
 
+        
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.updated_at'): </strong>
+            <em>{{{ $asset->updated_at }}}</em></div>
 
-        @if ($asset->model->eol)
-            <div class="col-md-12" style="padding-bottom: 5px;">
-            <strong>@lang('admin/hardware/form.eol_rate'): </strong>
-            {{{ $asset->model->eol }}}
-            @lang('admin/hardware/form.months') </div>
-            <div class="col-md-12" style="padding-bottom: 5px;">
-            <strong>@lang('admin/hardware/form.eol_date'): </strong>
-            {{{ $asset->eol_date() }}}
-            @if ($asset->months_until_eol())
-                 (
-                 @if ($asset->months_until_eol()->y > 0) {{{ $asset->months_until_eol()->y }}}
-                  @lang('general.years'),
-                 @endif
+        
 
-                {{{ $asset->months_until_eol()->m }}}
-                @lang('general.months')
-                )
-            @endif
-            </div>
-        @endif
-
-        @if ($asset->expected_checkin!='')
-            <div class="col-md-12" style="padding-bottom: 5px;">
-                  <strong>@lang('admin/hardware/form.expected_checkin')</strong>
-               : {{{ $asset->expected_checkin }}}
-            </div>
-       @endif
-
+       
 
 
 
@@ -324,14 +264,14 @@
 </div>
 <div class="col-md-12">
 
-      <h6>History </h6>
+      <h6> @lang('admin/hardware/general.history')</h6>
         <!-- checked out assets table -->
     <table class="table table-hover table-fixed break-word">
         <thead>
             <tr>
                 <th class="col-md-3">@lang('general.date')</th>
                 <th class="col-md-2"><span class="line"></span>@lang('general.admin')</th>
-                <th class="col-md-2"><span class="line"></span>@lang('table.actions')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('admin/hardware/form.name')</th>
                 <th class="col-md-2"><span class="line"></span>@lang('general.user')</th>
                 <th class="col-md-3"><span class="line"></span>@lang('general.notes')</th>
             </tr>
@@ -389,8 +329,9 @@
     </table>
     </div>
 </div>
+     
         <!-- side address column -->
-        <div class="col-md-3 col-xs-12 address pull-right">
+        <div class="col-md-3 col-xs-12 address pull-right" style="display:none">
 
 
         	<!-- Asset notes -->
@@ -483,8 +424,10 @@
             @endif
 
         </div>
-    </div>
+    </div>-->
 </div>
+
+
 
 <!-- Modal -->
 <div class="modal fade" id="uploadFileModal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModalLabel" aria-hidden="true">

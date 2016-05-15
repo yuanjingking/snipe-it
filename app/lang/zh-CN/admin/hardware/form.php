@@ -27,7 +27,7 @@ return array(
     'mac_address'		=> 'MAC地址',
     'months'			=> '月数',
 
-    'name'				=> '部门',
+    'name'				=> '资产部门',
     'model'             => '设备类别',
     'manufacturer'      => '生产厂家',
     'size'              =>'规格型号',

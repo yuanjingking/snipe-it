@@ -655,7 +655,7 @@ class Asset extends Depreciable
 							->orWhere('models.name','LIKE','%'.$search.'%');
 						});
 					});
-				})->orWhere(function($query) use ($search) {
+				})/*->orWhere(function($query) use ($search) {
 					$query->whereHas('assetstatus', function($query) use ($search) {
 						$query->where('name','LIKE','%'.$search.'%');
 					});
@@ -675,18 +675,22 @@ class Asset extends Depreciable
 							});
 						});
 					});
-				})/*->orWhere(function($query) use ($search) {
+				})->orWhere(function($query) use ($search) {
 					$query->whereHas('assetlog', function($query) use ($search) {
 						$query->where('action_type','=','checkout')
 						->where('created_at','LIKE','%'.$search.'%');
 					});
 				})*/->orWhere('name','LIKE','%'.$search.'%')
-				->orWhere('asset_tag','LIKE','%'.$search.'%')
-				->orWhere('serial','LIKE','%'.$search.'%')
-				->orWhere('department','LIKE','%'.$search.'%')
+				
+				->orWhere('size','LIKE','%'.$search.'%')
+				->orWhere('product_number','LIKE','%'.$search.'%')
+				->orWhere('product_code','LIKE','%'.$search.'%')
+				->orWhere('base_code','LIKE','%'.$search.'%')
 				->orWhere('address','LIKE','%'.$search.'%')
-				->orWhere('model_name','LIKE','%'.$search.'%')
-				->orWhere('order_number','LIKE','%'.$search.'%')
+				->orWhere('owner','LIKE','%'.$search.'%')
+				->orWhere('user_check','LIKE','%'.$search.'%')
+				->orWhere('money_way','LIKE','%'.$search.'%')
+				->orWhere('sugguset','LIKE','%'.$search.'%')
 				->orWhere('notes','LIKE','%'.$search.'');
 
 			}

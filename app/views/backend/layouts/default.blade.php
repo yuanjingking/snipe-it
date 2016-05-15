@@ -170,15 +170,15 @@
                          	<a href="{{ route('view-assets') }}">
                                 <i class="fa fa-check fa-fw"></i> @lang('general.viewassets')
                         	</a>
-                             <a href="{{ route('profile') }}">
+                            <!-- <a href="{{ route('profile') }}">
                                 <i class="fa fa-user fa-fw"></i> @lang('general.editprofile')
-                            </a>
-                             <a href="{{ route('change-password') }}">
+                            </a>-->
+                            <!-- <a href="{{ route('change-password') }}">
                                 <i class="fa fa-lock fa-fw"></i> @lang('general.changepassword')
-                            </a>
-                            <a href="{{ route('change-email') }}">
+                            </a>-->
+                          <!--  <a href="{{ route('change-email') }}">
                                 <i class="fa fa-envelope fa-fw"></i> @lang('general.changeemail')
-                            </a>
+                            </a>-->
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -211,11 +211,11 @@
                                 <i class="fa fa-briefcase fa-fw"></i> @lang('general.manufacturers')
                             </a>
                         </li>
-                        <li{{ (Request::is('admin/settings/suppliers*') ? ' class="active"' : '') }}>
+                        <!--<li{{ (Request::is('admin/settings/suppliers*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/suppliers') }}">
                                 <i class="fa fa-credit-card fa-fw"></i> @lang('general.suppliers')
                             </a>
-                        </li>
+                        </li>-->
                        <!-- <li{{ (Request::is('admin/settings/statuslabels*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/statuslabels') }}">
                                 <i class="fa fa-list fa-fw"></i> @lang('general.status_labels')
