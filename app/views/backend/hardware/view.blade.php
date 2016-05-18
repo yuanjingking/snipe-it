@@ -48,19 +48,17 @@
 <div class="row profile">
 <div class=" bio">
 
-		@if ($asset->model->deleted_at!='')
-            <div class="alert alert-warning alert-block">
-				<i class="fa fa-warning"></i>
-				@lang('admin/hardware/general.model_deleted', ['model_id' => $asset->model->id])
-			</div>
-        @elseif ($asset->deleted_at!='')
+		@if($asset->deleted_at!='')
 			<div class="alert alert-warning alert-block">
 				<i class="fa fa-warning"></i>
 				@lang('admin/hardware/general.deleted', ['asset_id' => $asset->id])
 			</div>
 		@endif
 
-       
+        	<div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.model'): </strong>
+            <em>{{{ $model_name}}}</em></div>
+			<div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.manufacturer'): </strong>
+            <em>{{{ $manufacturer_name}}}</em></div>
             <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.size'): </strong>
             <em>{{{ $asset->size }}}</em></div>
 

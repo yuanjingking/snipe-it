@@ -628,6 +628,11 @@ class AssetsController extends AdminController
     public function getView($assetId = null)
     {
         $asset = Asset::withTrashed()->find($assetId);
+        $categoryArray=categoryList();
+        $model_name=$categoryArray[$asset->model_id];
+        
+        $manufacturerArray=manufacturerList();
+        $manufacturer_name=$manufacturerArray[$asset->manufacturer_id];
 
         if (isset($asset->id)) {
 
@@ -638,7 +643,7 @@ class AssetsController extends AdminController
                 'url' => route('qr_code/hardware', $asset->id)
             );
 
-            return View::make('backend/hardware/view', compact('asset', 'qr_code'));
+            return View::make('backend/hardware/view', compact('asset', 'qr_code','manufacturer_name','model_name'));
         } else {
             // Prepare the error message
             $error = Lang::get('admin/hardware/message.does_not_exist', compact('id'));
@@ -1184,7 +1189,7 @@ class AssetsController extends AdminController
     $allowed_columns = [
                         'id',
                         'name', 
-                        'model',  
+                        'model_id',  
                         'manufacturer_id',       
                         'size',
                         'product_number',
@@ -1204,7 +1209,7 @@ class AssetsController extends AdminController
 
     switch ($sort)
     {
-        case 'model':
+        case 'model_id':
             $assets = $assets->OrderModels($order);
             break;
         case 'category':
