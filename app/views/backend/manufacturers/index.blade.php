@@ -34,7 +34,7 @@
             <tr>
                 <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
                 <th data-sortable="true" data-field="name">@lang('admin/manufacturers/table.name')</th>
-                <th data-switchable="true" data-searchable="false" data-sortable="false" data-field="assets">@lang('general.assets')</th>
+                <!--<th data-switchable="true" data-searchable="false" data-sortable="false" data-field="assets">@lang('general.assets')</th>-->
                 <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">@lang('table.actions')</th>
             </tr>
         </thead>

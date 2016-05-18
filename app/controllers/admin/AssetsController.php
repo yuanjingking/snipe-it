@@ -418,14 +418,20 @@ class AssetsController extends AdminController
     {
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
+
+
             // Redirect to the asset management page with error
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
 
         // Get the dropdown of users and then pass it to the checkout view
         $users_list = usersList();
-
-        return View::make('backend/hardware/checkout', compact('asset'))->with('users_list',$users_list);
+          $categoryArray=categoryList();
+        $model_name=$categoryArray[$asset->model_id];
+        
+        $manufacturerArray=manufacturerList();
+        $manufacturer_name=$manufacturerArray[$asset->manufacturer_id];
+        return View::make('backend/hardware/checkout', compact('asset','model_name','manufacturer_name'))->with('users_list',$users_list);
 
     }
 

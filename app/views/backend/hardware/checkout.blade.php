@@ -25,15 +25,6 @@
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-            <!-- Asset tag -->
-            <div class="form-group">
-            <label class="col-sm-2 control-label">@lang('admin/hardware/form.tag')</label>
-                <div class="col-md-6">
-                  <p class="form-control-static">{{{ $asset->asset_tag }}}</p>
-                </div>
-            </div>
-
-
 
             <!-- Asset Name -->
             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
@@ -45,15 +36,21 @@
             </div>
 
 
-            @if ($asset->model->name)
-            <!-- Asset name -->
+        
+            <!-- model name -->
             <div class="form-group">
-            <label class="col-sm-2 control-label">@lang('admin/hardware/form.model')</label>
+            <label class="col-sm-2 control-label">@lang('admin/hardware/form.model'): </label>
                 <div class="col-md-6">
-                  <p class="form-control-static">{{{ $asset->model->name }}}</p>
+                  <p class="form-control-static">{{{ $model_name }}}</p>
                 </div>
             </div>
-            @endif
+              <!-- model name -->
+            <div class="form-group">
+            <label class="col-sm-2 control-label">@lang('admin/hardware/form.manufacturer'): </label>
+                <div class="col-md-6">
+                  <p class="form-control-static">{{{ $manufacturer_name }}}</p>
+                </div>
+            </div>
 
 
             <!-- User -->
