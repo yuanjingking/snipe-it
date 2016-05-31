@@ -60,14 +60,14 @@ class AssetsController extends AdminController
 	}
 	public function checkAssetNo($category_id,$old_category_id)
 	{
-		$ainfo=DB::table('assets')->where('product_number','LIKE','B00'.$category_id.'%')->orderBy("product_number","desc")->first();
+		$ainfo=DB::table('assets')->where('model_id',$category_id)->orderBy("product_number","desc")->first();
 	  if($ainfo !=null){
             $cnum=(int)str_replace("B00","",$ainfo->product_number);
       }else{
-            $cnum=(int)$category_id.'00001';
+            $cnum=0;
       }
      
-	   return $old_category_id!=$category_id ? "B00".($cnum+1):$ainfo->product_number;
+	   return $old_category_id!=$category_id ? $cnum==0 ? "":"B00".($cnum+1):$ainfo->product_number;
 	}
     /**
      * Asset create.
@@ -159,9 +159,9 @@ class AssetsController extends AdminController
             }
 
             if (e(Input::get('manufacturer_id')) == '') {
-                $asset->manufacturer_id =  0;
+                $asset->manufacturer_id =  45;
             } else {
-                $asset->manufacturer_id        = e(Input::get('manufacturer_id'));
+                $asset->manufacturer_id        = e(Input::get('manufacturer_id'))>0 ? e(Input::get('manufacturer_id')):45;
             }
 
             if (e(Input::get('requestable')) == '') {
@@ -307,11 +307,7 @@ class AssetsController extends AdminController
                 $asset->purchase_date        = e(Input::get('purchase_date'));
             }
 
-            if (e(Input::get('manufacturer_id')) == '') {
-                $asset->manufacturer_id =  NULL;
-            } else {
-                $asset->manufacturer_id        = e(Input::get('manufacturer_id'));
-            }
+            
 
             if (e(Input::get('requestable')) == '') {
                 $asset->requestable =  0;
@@ -330,9 +326,63 @@ class AssetsController extends AdminController
 
             // Update the asset data
 
+            $modified="";
+            if($asset->name!= e(Input::get('name')) ){
+               $modified.="【".Lang::get('admin/hardware/form.name')." 从 ".$asset->name." 修改成 ".e(Input::get('name'))."】 ";
+            }
+            if($asset->model_id!= e(Input::get('model_id'))){
+                  $categoryArray=categoryList();
+                $model_name=$categoryArray[$asset->model_id];
+                $model_name_new=e(Input::get('model_id'))>0 ? $categoryArray[e(Input::get('model_id'))]:"";
+      
+               $modified.="【".Lang::get('admin/hardware/form.model')."：".$model_name." 修改成 ".$model_name_new."】 "; 
+            }
+            if($asset->manufacturer_id!= e(Input::get('manufacturer_id'))){
+
+                $manufacturerArray=manufacturerList();
+                $manufacturer_name=$manufacturerArray[$asset->manufacturer_id];
+                $manufacturer_name_new=e(Input::get('manufacturer_id'))>0 ? $manufacturerArray[e(Input::get('manufacturer_id'))]:"";
+               $modified.="【".Lang::get('admin/hardware/form.manufacturer')."：".$manufacturer_name." 修改成 ".$manufacturer_name_new."】 "; 
+            }
+            if($asset->size!= e(Input::get('size'))){
+               $modified.="【".Lang::get('admin/hardware/form.size')." 从 ".$asset->size." 修改成 ".e(Input::get('size'))."】 "; 
+            }
+            if($asset->product_number!= e(Input::get('product_number'))){
+               $modified.="【".Lang::get('admin/hardware/form.product_number')." 从 ".$asset->product_number." 修改成 ".e(Input::get('product_number'))."】 "; 
+            }
+            if($asset->product_code!= e(Input::get('product_code'))){
+               $modified.="【".Lang::get('admin/hardware/form.product_code')." 从 ".$asset->product_code." 修改成 ".e(Input::get('product_code'))."】 "; 
+            }
+            if($asset->base_code!= e(Input::get('base_code'))){
+               $modified.="【".Lang::get('admin/hardware/form.base_code')." 从 ".$asset->base_code." 修改成 ".e(Input::get('base_code'))."】 "; 
+            }
+            if($asset->address!= e(Input::get('address'))){
+               $modified.="【".Lang::get('admin/hardware/form.address')." 从 ".$asset->address." 修改成 ".e(Input::get('address'))."】 "; 
+            }
+            if($asset->owner!= e(Input::get('owner'))){
+               $modified.="【".Lang::get('admin/hardware/form.owner')." 从 ".$asset->owner." 修改成 ".e(Input::get('owner'))."】 "; 
+            }
+            if($asset->user_check!= e(Input::get('user_check'))){
+               $modified.="【".Lang::get('admin/hardware/form.user_check')." 从 ".$asset->user_check." 修改成 ".e(Input::get('user_check'))."】 "; 
+            }
+            if($asset->money_way!= e(Input::get('money_way'))){
+               $modified.="【".Lang::get('admin/hardware/form.money_way')." 从 ".$asset->money_way." 修改成 ".e(Input::get('money_way'))."】 "; 
+            }
+            if($asset->sugguset!= e(Input::get('sugguset'))){
+               $modified.="【".Lang::get('admin/hardware/form.sugguset')." 从 ".$asset->sugguset." 修改成 ".e(Input::get('sugguset'))."】 "; 
+            }
+            if($asset->notes!= e(Input::get('notes'))){
+               $modified.="【".Lang::get('admin/hardware/form.notes')." 从 ".$asset->notes." 修改成 ".e(Input::get('notes'))."】 "; 
+            }
 
             $asset->name                    = e(Input::get('name'));
+            
             $asset->model_id                = e(Input::get('model_id'));
+            if (e(Input::get('manufacturer_id')) == '') {
+                $asset->manufacturer_id = 45;
+            } else {
+                $asset->manufacturer_id        = e(Input::get('manufacturer_id')) >0 ? e(Input::get('manufacturer_id')) :45;
+            }
             $asset->size                   = e(Input::get('size'));
             $asset->product_number            = e(Input::get('product_number'));
             $asset->product_code                    = e(Input::get('product_code'));
@@ -353,7 +403,7 @@ class AssetsController extends AdminController
                     $logaction->checkedout_to = $asset->assigned_to;
                     $logaction->asset_type = 'hardware';
                     $logaction->user_id = Sentry::getUser()->id;
-                    $logaction->note = e(Input::get('note'));
+                    $logaction->note = $modified;
                     $log = $logaction->logaction('更新资产');
                      $logaction->save();
                 // Redirect to the new asset page
@@ -1031,11 +1081,11 @@ class AssetsController extends AdminController
 
 				$assets = Input::get('edit_asset');
 
-				$supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
+				$manufacturer_list = array('' => '') + manufacturerList();
                 $statuslabel_list = array('' => '') + Statuslabel::lists('name', 'id');
                 $location_list = array('' => '') + Location::lists('name', 'id');
 
-                return View::make('backend/hardware/bulk')->with('assets',$assets)->with('supplier_list',$supplier_list)->with('statuslabel_list',$statuslabel_list)->with('location_list',$location_list);
+                return View::make('backend/hardware/bulk')->with('assets',$assets)->with('manufacturer_list',$manufacturer_list)->with('statuslabel_list',$statuslabel_list)->with('location_list',$location_list);
 
 
 			}
@@ -1062,7 +1112,7 @@ class AssetsController extends AdminController
 
 			$assets = Input::get('bulk_edit');
 
-			if ( (Input::has('purchase_date')) ||  (Input::has('purchase_cost'))  ||  (Input::has('supplier_id')) ||  (Input::has('order_number')) || (Input::has('warranty_months')) || (Input::has('rtd_location_id'))  || (Input::has('requestable')) ||  (Input::has('status_id')) )  {
+			if ( (Input::has('purchase_date')) ||  (Input::has('purchase_cost'))  ||  (Input::has('manufacturer_id')) ||  (Input::has('order_number')) || (Input::has('warranty_months')) || (Input::has('rtd_location_id'))  || (Input::has('requestable')) ||  (Input::has('status_id')) )  {
 
 				foreach ($assets as $key => $value) {
 
@@ -1076,8 +1126,8 @@ class AssetsController extends AdminController
 						$update_array['purchase_cost'] =  e(Input::get('purchase_cost'));
 					}
 
-					if (Input::has('supplier_id')) {
-						$update_array['supplier_id'] =  e(Input::get('supplier_id'));
+					if (Input::has('manufacturer_id')) {
+						$update_array['manufacturer_id'] =  e(Input::get('manufacturer_id'));
 					}
 
 					if (Input::has('order_number')) {

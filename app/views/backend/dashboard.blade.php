@@ -37,7 +37,7 @@
 			        <th class="col-md-2"><span class="line"></span>@lang('general.admin')</th>
 			        <th class="col-md-3"><span class="line"></span>@lang('admin/hardware/form.name')</th>
 			        <th class="col-md-2"><span class="line"></span>@lang('table.actions')</th>
-			        <th class="col-md-3"><span class="line"></span>@lang('general.user')</th>
+			       
 			    </tr>
 			</thead>
 			<tbody>
@@ -69,14 +69,7 @@
 			       <td>
 				       {{ strtolower(Lang::get('general.'.str_replace(' ','_',$activity->action_type))) }}
 			       </td>
-			       <td>
-                       @if ($activity->action_type=='requested')
-                            <a href="{{ route('view/user', $activity->user_id) }}">{{{ $activity->adminlog->fullName() }}}</a>
-                       @elseif ($activity->userlog)
-			           		<a href="{{ route('view/user', $activity->checkedout_to) }}">{{{ $activity->userlog->fullName() }}}</a>
-			           @endif
-
-			           </td>
+			    
 
 
 			    </tr>

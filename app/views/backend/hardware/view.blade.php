@@ -269,8 +269,8 @@
             <tr>
                 <th class="col-md-3">@lang('general.date')</th>
                 <th class="col-md-2"><span class="line"></span>@lang('general.admin')</th>
-                <th class="col-md-2"><span class="line"></span>@lang('admin/hardware/form.name')</th>
-                <th class="col-md-2"><span class="line"></span>@lang('general.user')</th>
+                <th class="col-md-2"><span class="line"></span>操作类型</th>
+            
                 <th class="col-md-3"><span class="line"></span>@lang('general.notes')</th>
             </tr>
         </thead>
@@ -286,19 +286,7 @@
                     @endif
                 </td>
                 <td>{{ $log->action_type }}</td>
-                <td>
-                    @if ((isset($log->checkedout_to)) && ($log->checkedout_to!=0) && ($log->checkedout_to!=''))
-
-                        @if ($log->userlog->deleted_at=='')
-                            <a href="{{ route('view/user', $log->checkedout_to) }}">
-                            {{{ $log->userlog->fullName() }}}
-                             </a>
-                        @else
-                            <del>{{{ $log->userlog->fullName() }}}</del>
-                        @endif
-
-                    @endif
-                </td>
+                
                 <td>
                     @if ($log->note) {{{ $log->note }}}
                     @endif
@@ -422,7 +410,7 @@
             @endif
 
         </div>
-    </div>-->
+    </div>
 </div>
 
 

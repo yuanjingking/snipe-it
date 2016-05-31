@@ -109,7 +109,7 @@ function insertSql($table,$fields=array()){
     $update="INSERT INTO $table ($f) values($v)";
    
    $rdata = mysql_query($update,mysqlConnect());
-   echo $update;
+  // echo $update;
  return $rdata ? true:false;
 }
 
