@@ -61,7 +61,7 @@ class AssetsController extends AdminController
 	public function checkAssetNo($category_id,$old_category_id)
 	{
 		$ainfo=DB::table('assets')->where('model_id',$category_id)->orderBy("product_number","desc")->first();
-	  if($ainfo !=null){
+      if($ainfo !=null){
             $cnum=(int)str_replace("B00","",$ainfo->product_number);
       }else{
             $cnum=0;
@@ -1084,8 +1084,8 @@ class AssetsController extends AdminController
 				$manufacturer_list = array('' => '') + manufacturerList();
                 $statuslabel_list = array('' => '') + Statuslabel::lists('name', 'id');
                 $location_list = array('' => '') + Location::lists('name', 'id');
-
-                return View::make('backend/hardware/bulk')->with('assets',$assets)->with('manufacturer_list',$manufacturer_list)->with('statuslabel_list',$statuslabel_list)->with('location_list',$location_list);
+                $model_list  = categoryList();
+                return View::make('backend/hardware/bulk')->with('assets',$assets)->with('model_list',$model_list)->with('manufacturer_list',$manufacturer_list)->with('statuslabel_list',$statuslabel_list)->with('location_list',$location_list);
 
 
 			}
@@ -1129,7 +1129,9 @@ class AssetsController extends AdminController
 					if (Input::has('manufacturer_id')) {
 						$update_array['manufacturer_id'] =  e(Input::get('manufacturer_id'));
 					}
-
+                    if (Input::has('model_id')) {
+                        $update_array['model_id'] =  e(Input::get('model_id'));
+                    }
 					if (Input::has('order_number')) {
 						$update_array['order_number'] =  e(Input::get('order_number'));
 					}

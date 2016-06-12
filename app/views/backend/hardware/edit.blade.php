@@ -394,16 +394,18 @@
 </div>
 <script>
 $("#asset_category_id").change(function(){
+  var cid=$(this).val();
 $.ajax({
           url: "{{Config::get('app.url')}}/hardware/checknumber?old_category_id="
-          +$("#old_category_id").val()+"&category_id="+$(this).val(),
+          +$("#old_category_id").val()+"&category_id="+cid,
           success: function(data) {
-             if($("#old_product_number").val()!="" && $(this).val()==$("#old_category_id").val()){
-              $("#product_number").val($("#old_product_number").val());
-             // $("#product_number_text").text($("#old_product_number").val());
+             if(cid==$("#old_category_id").val()){
+                
+                $("#product_number").val($("#old_product_number").val());
+             
              }else{
               $("#product_number").val(data);
-              //$("#product_number_text").text(data);
+              
              }
                    
           }

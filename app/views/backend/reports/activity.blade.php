@@ -30,9 +30,9 @@
             <tr role="row">
             <th class="col-sm-1">@lang('general.admin')</th>
             <th class="col-sm-1"><span class="line"></span>@lang('general.action')</th>
-            <th class="col-sm-1"><span class="line"></span>@lang('general.type')</th>
-            <th class="col-sm-1"><span class="line"></span>@lang('general.item')</th>
-            <th class="col-sm-1"><span class="line"></span>@lang('general.user')</th>
+           
+            <th class="col-sm-1"><span class="line"></span>@lang('admin/hardware/form.name')</th>
+    <th class="col-sm-1"><span class="line"></span>@lang('general.notes')</th>
             <th class="col-sm-1"><span class="line"></span>@lang('general.date')</th
         </tr>
     </thead>
@@ -42,36 +42,23 @@
         <tr>
             <td><a href="../admin/users/{{ $log_action->adminlog->id }}/view">{{{ $log_action->adminlog->fullName() }}}</a></td>
             <td>{{{ $log_action->action_type }}}</td>
-            <td>
-	            @if ($log_action->asset_type=="hardware")
-	            	Asset
-	            @elseif ($log_action->asset_type=="software")
-	            	License
-	            @elseif ($log_action->asset_type=="accessory")
-	            	Accessory
-                @elseif ($log_action->asset_type=="consumable")
-    	            Consumable
-	            @endif
-            </td>
+           
 
             <td>
-            @if (($log_action->assetlog) && ($log_action->asset_type=="hardware"))
-                 {{ $log_action->assetlog->showAssetName() }}
-             @elseif (($log_action->licenselog) && ($log_action->asset_type=="software"))
-                 {{ $log_action->licenselog->name }}
-             @elseif (($log_action->consumablelog) && ($log_action->asset_type=="consumable"))
-                 {{ $log_action->consumablelog->name }}
-             @elseif (($log_action->accessorylog) && ($log_action->asset_type=="accessory"))
-                 {{ $log_action->accessorylog->name }}
-             @else
-                 @lang('general.bad_data')
-             @endif
+              @if (($log_action->assetlog) && ($log_action->asset_type=="hardware"))
+                    <a href="{{ route('view/hardware', $log_action->asset_id) }}">{{ $log_action->assetlog->showAssetName() }}</a>
+                  @elseif (($log_action->licenselog) && ($log_action->asset_type=="software"))
+                    <a href="{{ route('view/license', $log_action->asset_id) }}">{{{ $log_action->licenselog->name }}}</a>
+                        @elseif (($log_action->consumablelog) && ($log_action->asset_type=="consumable"))
+                      <a href="{{ route('view/consumable', $log_action->consumable_id) }}">{{{ $log_action->consumablelog->name }}}</a>
+                  @elseif (($log_action->accessorylog) && ($log_action->asset_type=="accessory"))
+                    <a href="{{ route('view/accessory', $log_action->accessory_id) }}">{{{ $log_action->accessorylog->name }}}</a>
+                        @else
+                            @lang('general.bad_data')
+                  @endif
+
             </td>
-            <td>
-	            @if ($log_action->userlog)
-	            	<a href="../admin/users/{{ $log_action->userlog->id }}/view">{{{ $log_action->userlog->fullName() }}}</a>
-	            @endif
-            </td>
+            <td>{{{ $log_action->note }}}</td>
 
             <td>{{{ $log_action->created_at }}}</td>
         </tr>

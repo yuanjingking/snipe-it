@@ -35,10 +35,18 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
 
+ <!-- 设备类别 -->
+          <div class="form-group {{ $errors->has('model_id') ? ' has-error' : '' }}">
+                <label for="model_id" class="col-md-2 control-label">@lang('general.category') </label>
+                <div class="col-md-7 col-sm-12">
+                {{ Form::select('model_id', $model_list , Input::old('model_id'), array('class'=>'select2', 'style'=>'min-width:350px')) }}
+                    {{ $errors->first('model_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                </div>
+            </div>
 
             <!-- Supplier -->
             <div class="form-group {{ $errors->has('manufacturer_id') ? ' has-error' : '' }}">
-                <label for="manufacturer_id" class="col-md-2 control-label">@lang('admin/hardware/form.supplier')</label>
+                <label for="manufacturer_id" class="col-md-2 control-label">@lang('general.manufacturer')</label>
                 <div class="col-md-7">
                     {{ Form::select('manufacturer_id', $manufacturer_list , Input::old('manufacturer_id'), array('class'=>'select2', 'style'=>'min-width:350px')) }}
                     {{ $errors->first('manufacturer_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}

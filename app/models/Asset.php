@@ -680,18 +680,18 @@ class Asset extends Depreciable
 						$query->where('action_type','=','checkout')
 						->where('created_at','LIKE','%'.$search.'%');
 					});
-				})*/->orWhere('name','LIKE','%'.$search.'%')
+				})*/->orWhere('assets.name','LIKE','%'.$search.'%')
 				
-				->orWhere('size','LIKE','%'.$search.'%')
-				->orWhere('product_number','LIKE','%'.$search.'%')
-				->orWhere('product_code','LIKE','%'.$search.'%')
-				->orWhere('base_code','LIKE','%'.$search.'%')
-				->orWhere('address','LIKE','%'.$search.'%')
-				->orWhere('owner','LIKE','%'.$search.'%')
-				->orWhere('user_check','LIKE','%'.$search.'%')
-				->orWhere('money_way','LIKE','%'.$search.'%')
-				->orWhere('sugguset','LIKE','%'.$search.'%')
-				->orWhere('notes','LIKE','%'.$search.'');
+				->orWhere('assets.size','LIKE','%'.$search.'%')
+				->orWhere('assets.product_number','LIKE','%'.$search.'%')
+				->orWhere('assets.product_code','LIKE','%'.$search.'%')
+				->orWhere('assets.base_code','LIKE','%'.$search.'%')
+				->orWhere('assets.address','LIKE','%'.$search.'%')
+				->orWhere('assets.owner','LIKE','%'.$search.'%')
+				->orWhere('assets.user_check','LIKE','%'.$search.'%')
+				->orWhere('assets.money_way','LIKE','%'.$search.'%')
+				->orWhere('assets.sugguset','LIKE','%'.$search.'%')
+				->orWhere('assets.notes','LIKE','%'.$search.'%');
 
 			}
 		});
